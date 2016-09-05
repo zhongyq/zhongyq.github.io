@@ -1,0 +1,699 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python2.7,CentOS,MacOS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ZhOnG" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="本文主要介绍了服务器上运行python的一些基本配置，python版本为2.7.10，服务器版本为CentOS 6.5.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python爬虫（一）—— 配置服务器">
+<meta property="og:url" content="http://yoursite.com/2016/09/05/server-initialize/index.html">
+<meta property="og:site_name" content="ZhOnG">
+<meta property="og:description" content="本文主要介绍了服务器上运行python的一些基本配置，python版本为2.7.10，服务器版本为CentOS 6.5.">
+<meta property="og:updated_time" content="2016-09-05T14:43:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python爬虫（一）—— 配置服务器">
+<meta name="twitter:description" content="本文主要介绍了服务器上运行python的一些基本配置，python版本为2.7.10，服务器版本为CentOS 6.5.">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/05/server-initialize/"/>
+
+  <title> Python爬虫（一）—— 配置服务器 | ZhOnG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">ZhOnG</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">随缘笔记</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python爬虫（一）—— 配置服务器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-05T20:07:08+08:00" content="2016-09-05">
+              2016-09-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Python爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">Python爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="CentOS服务器初始配置"><a href="#CentOS服务器初始配置" class="headerlink" title="CentOS服务器初始配置"></a>CentOS服务器初始配置</h2><h3 id="购买服务器"><a href="#购买服务器" class="headerlink" title="购买服务器"></a>购买服务器</h3><p>此次服务器购买了阿里云上的最基本的服务器配置：</p>
+<ul>
+<li>500G数据盘</li>
+<li>4G内存，4M带宽</li>
+<li>64位CentOS 6.5（听说这个版本最常用？）</li>
+</ul>
+<p>正常的小项目已经够用了。</p>
+<p>购买完毕后就能使用购买时自己配置的root帐号登录了！</p>
+<h3 id="登录服务器"><a href="#登录服务器" class="headerlink" title="登录服务器"></a>登录服务器</h3><p>首先可以用root帐号登录，在命令行中通过ssh指令登录：</p>
+<p><code>bash
+ssh root@your_ip</code></p>
+<p>输入密码后即可登录入系统</p>
+<h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h3><p>显然是用root用户登录并运行程序虽然方便但却是不安全的，很容易造成系统的崩坏，所以创建一个用户是有必要的，该用户只有在需要的时候才使用sudo权限的命令。</p>
+<p>创建用户的命令：<br><code>bash
+useradd your_username</code></p>
+<p>为该用户添加密码：<br><code>bash
+passwd your_username</code></p>
+<p>此时已经完成添加用户，并且该用户的根目录在/home/your_username中，但此时该用户没有root权限，因此我们也需要配置该用户的权限。</p>
+<p>配置用户权限的文件在 <strong>/etc/sudoers</strong> 文件中，但可以发现如果直接通过vi命令打开sudoers文件时是无权修改的，该文件默认的权限为440，此时你需要通过chmod命令修改sudoers的写入权限，具体如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">chmod 777 /etc/sudoers</div><div class="line">vi /etc/sudoers</div></pre></td></tr></table></figure>
+<p>之后找到 <strong>Allow root to run any commands anywhere</strong> 下面，在<br><code>root    ALL=(ALL)    ALL</code><br>后添加一行<br><code>your_username    ALL=(ALL)    ALL</code></p>
+<p>最后将sudoers文件的权限更改回去：<br><code>chmod 440 /etc/sudoers</code></p>
+<p>此时，your_username这个用户已经有了sudo的权限啦！<br>从此除非必要，从你电脑的命令行可以用your_username这个用户通过ssh登录了，即:<br><code>ssh your_username@your_ip</code></p>
+<h2 id="配置Python环境"><a href="#配置Python环境" class="headerlink" title="配置Python环境"></a>配置Python环境</h2><h3 id="管理包"><a href="#管理包" class="headerlink" title="管理包"></a>管理包</h3><p>CentOS中自带<code>yum</code><br>命令来管理 <em>.rpm</em> 的包，可以通过</p>
+<p><code>(sudo) yum list</code></p>
+<p>来查看。</p>
+<h3 id="Python-2-7"><a href="#Python-2-7" class="headerlink" title="Python 2.7"></a>Python 2.7</h3><p>CentOS 6.5系统自带的是Python 2.6.6，而本次项目需要Python2.7，但悲剧地发现<code>yum</code>中并没有Python 2.7，因此我们只能采取源码安装。</p>
+<p>Python中有很重要的一个一个指令是<code>pip</code>指令，该指令能够十分方便的安装python包，<strong>但是这边有个大坑：</strong>必须先通过yum安装一些python依赖包，<strong>yum在python2.7的时候是不能用的</strong>，按照大部分教程装完python2.7后直接软链替换掉自带的python2.6后就用不了yum了！如此在之后装pip和setuptools的时候会报错！！！</p>
+<p>以下为亲测正确的步骤：</p>
+<ul>
+<li>通过<code>yum</code>安装相关需要的包:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">yum proupinstall <span class="string">"Development tools"</span></div><div class="line">yum install zlib-devel</div><div class="line">yum install bzip2-devel</div><div class="line">yum install openssl-devel</div><div class="line">yum install sqlite-devel</div></pre></td></tr></table></figure>
+<ul>
+<li>下载python2.7.10源码:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget http://python.org/ftp/python/2.7.10/Python-2.7.10.tar.xz</div><div class="line">tar -xf Python-2.7.10.tar.xz</div></pre></td></tr></table></figure>
+<ul>
+<li>编译安装</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> Python-2.7.10</div><div class="line">./configure --prefix=/usr/<span class="built_in">local</span> <span class="comment">#此为安装地址</span></div><div class="line">make &amp;&amp; make altinstall</div></pre></td></tr></table></figure>
+<ul>
+<li>软链接替换默认python版本</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ln -sb /usr/<span class="built_in">local</span>/bin/python2.7 /usr/bin/python</div></pre></td></tr></table></figure>
+<p>NOTE: 至此Python2.7.10安装完成，但是有一点不好的是<strong>yum无法使用了</strong>，要避免这一点，创建软链接的时候不要替换/usr/bin/python，而链接到其他的一个python27，如此需要实用python2.7的时候命令行的代码更改为<code>python27</code></p>
+<ul>
+<li>查看版本</li>
+</ul>
+<p>如果创建并替换了软链接则使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python --version</div></pre></td></tr></table></figure></p>
+<p>如果没有原始python的软链接，而软链接到了/usr/bin/python27的话使用：<br><code>python27 --version</code></p>
+<h3 id="pip"><a href="#pip" class="headerlink" title="pip"></a>pip</h3><p>在上已经介绍了python的pip的作用，话不多说直接安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">easy_install pip</div></pre></td></tr></table></figure>
+<p>当然这很有可能会出现一个问题就是<code>easy_install</code>指令很可能仍旧对应的是<strong>python2.6.6</strong>的版本，因此需要将easy_install指令也重新链接一下，链接指令类似python，在此不再赘述。</p>
+<p>此处我们直接使用源码安装，pip的安装还需要<strong>setuptools</strong>,因此首先下载setuptools及pip的源码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget https://pypi.python.org/packages/d3/16/21cf5dc6974280197e42d57bf7d372380562ec69aef9bb796b5e2dbbed6e/setuptools-20.10.1.tar.gz</div><div class="line">wget --no-check-certificate https://pypi.python.org/packages/41/27/9a8d24e1b55bd8c85e4d022da2922cb206f183e2d18fee4e320c9547e751/pip-8.1.1.tar.gz</div></pre></td></tr></table></figure>
+<p>之后使用<code>tar -xf</code>命令解压后使用python安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python setup.py install</div></pre></td></tr></table></figure>
+<p>之后需要同python一样建立软链接才能正常使用<code>pip</code>指令: </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ln <span class="_">-s</span> /usr/<span class="built_in">local</span>/bin/pip /usr/bin/pip</div></pre></td></tr></table></figure>
+<p>最后更新pip即可:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install --upgrade pip</div></pre></td></tr></table></figure>
+<h2 id="常用Python类库"><a href="#常用Python类库" class="headerlink" title="常用Python类库"></a>常用Python类库</h2><h3 id="requests"><a href="#requests" class="headerlink" title="requests"></a>requests</h3><p>发送请求所需要的包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install requests</div></pre></td></tr></table></figure>
+<h3 id="simplejson"><a href="#simplejson" class="headerlink" title="simplejson"></a>simplejson</h3><p>对象格式化成json</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install simplejson</div></pre></td></tr></table></figure>
+<h3 id="beautifulsoup-4"><a href="#beautifulsoup-4" class="headerlink" title="beautifulsoup 4"></a>beautifulsoup 4</h3><p>解析html/xml格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install bs4</div></pre></td></tr></table></figure>
+<h3 id="python-nmap"><a href="#python-nmap" class="headerlink" title="python-nmap"></a>python-nmap</h3><p>扫描端口使用的类库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install python-nmap</div></pre></td></tr></table></figure>
+<p><strong>NOTE: 大坑！仅仅安装这个，会在运行时报错！原因时找不到类库使用到的nmap指令，使用了网上各大方法竟然还是失败了，然而突然发现还有一个类库叫nmap，会自动配置一个nmap指令！！！</strong>安装nmap后才不会报错，因此还需要一下命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install nmap</div></pre></td></tr></table></figure>
+<p>至此最最基本的python的服务器和爬虫所需类库配置完毕</p>
+<h2 id="附录：MAC下的环境配置"><a href="#附录：MAC下的环境配置" class="headerlink" title="附录：MAC下的环境配置"></a>附录：MAC下的环境配置</h2><h3 id="Python2-7"><a href="#Python2-7" class="headerlink" title="Python2.7"></a>Python2.7</h3><p>由于MacOS 自带的是python2.7，因此可以直接忽略～</p>
+<h3 id="brew"><a href="#brew" class="headerlink" title="brew"></a>brew</h3><p><code>brew</code>指令对于mac来说是个神器，基本可以安装大部分的软件和类库，使用以下指令安装:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/ruby <span class="_">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></div></pre></td></tr></table></figure>
+<h3 id="pip-1"><a href="#pip-1" class="headerlink" title="pip"></a>pip</h3><p>直接<code>sudo easy_install pip</code>即可</p>
+<h3 id="类库"><a href="#类库" class="headerlink" title="类库"></a>类库</h3><p>同CentOS中pip安装即可，特别说明python-nmap包，可以直接使用<code>brew install nmap</code>完成！</p>
+<p>暂时先写到这吧～！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python2-7/" rel="tag">#python2.7</a>
+          
+            <a href="/tags/CentOS/" rel="tag">#CentOS</a>
+          
+            <a href="/tags/MacOS/" rel="tag">#MacOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/07/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar/ez.jpg"
+               alt="yqzhong" />
+          <p class="site-author-name" itemprop="name">yqzhong</p>
+          <p class="site-description motion-element" itemprop="description">一个学生的逆袭道路</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CentOS服务器初始配置"><span class="nav-number">1.</span> <span class="nav-text">CentOS服务器初始配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#购买服务器"><span class="nav-number">1.1.</span> <span class="nav-text">购买服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录服务器"><span class="nav-number">1.2.</span> <span class="nav-text">登录服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建用户"><span class="nav-number">1.3.</span> <span class="nav-text">创建用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Python环境"><span class="nav-number">2.</span> <span class="nav-text">配置Python环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#管理包"><span class="nav-number">2.1.</span> <span class="nav-text">管理包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-2-7"><span class="nav-number">2.2.</span> <span class="nav-text">Python 2.7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pip"><span class="nav-number">2.3.</span> <span class="nav-text">pip</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用Python类库"><span class="nav-number">3.</span> <span class="nav-text">常用Python类库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#requests"><span class="nav-number">3.1.</span> <span class="nav-text">requests</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#simplejson"><span class="nav-number">3.2.</span> <span class="nav-text">simplejson</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#beautifulsoup-4"><span class="nav-number">3.3.</span> <span class="nav-text">beautifulsoup 4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python-nmap"><span class="nav-number">3.4.</span> <span class="nav-text">python-nmap</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录：MAC下的环境配置"><span class="nav-number">4.</span> <span class="nav-text">附录：MAC下的环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python2-7"><span class="nav-number">4.1.</span> <span class="nav-text">Python2.7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brew"><span class="nav-number">4.2.</span> <span class="nav-text">brew</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pip-1"><span class="nav-number">4.3.</span> <span class="nav-text">pip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类库"><span class="nav-number">4.4.</span> <span class="nav-text">类库</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yqzhong</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
