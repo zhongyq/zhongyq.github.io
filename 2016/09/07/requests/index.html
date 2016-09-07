@@ -1,0 +1,667 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python2.7,CentOS,python requests," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ZhOnG" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="本文主要介绍了使用python requests类库进行请求并使用BeautifulSoup4类库进行正文检测。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python爬虫（二）—— 使用requests类库进行简单的爬取网页">
+<meta property="og:url" content="http://yoursite.com/2016/09/07/requests/index.html">
+<meta property="og:site_name" content="ZhOnG">
+<meta property="og:description" content="本文主要介绍了使用python requests类库进行请求并使用BeautifulSoup4类库进行正文检测。">
+<meta property="og:image" content="http://yoursite.com/images/requests/software_nju_edu_cn_response.png">
+<meta property="og:image" content="http://yoursite.com/images/requests/sohu_response.png">
+<meta property="og:updated_time" content="2016-09-07T14:16:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python爬虫（二）—— 使用requests类库进行简单的爬取网页">
+<meta name="twitter:description" content="本文主要介绍了使用python requests类库进行请求并使用BeautifulSoup4类库进行正文检测。">
+<meta name="twitter:image" content="http://yoursite.com/images/requests/software_nju_edu_cn_response.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/07/requests/"/>
+
+  <title> Python爬虫（二）—— 使用requests类库进行简单的爬取网页 | ZhOnG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">ZhOnG</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">随缘笔记</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python爬虫（二）—— 使用requests类库进行简单的爬取网页
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-07T19:14:37+08:00" content="2016-09-07">
+              2016-09-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Python爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">Python爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前阶段从零开始学习了使用python来进行爬虫的开发，遇到了很多坑爹问题。</p>
+<h2 id="requests类库"><a href="#requests类库" class="headerlink" title="requests类库"></a>requests类库</h2><h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><ul>
+<li>get/post/put/delete/options/head请求：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> requests</div><div class="line"></div><div class="line"><span class="comment"># get请求</span></div><div class="line">request = requests.get(url)</div><div class="line"></div><div class="line"><span class="string">'''</span></div><div class="line">post请求：</div><div class="line">request = requests.post(url)</div><div class="line">其他同理</div><div class="line">'''</div></pre></td></tr></table></figure>
+<ul>
+<li>get/post请求后的常用参数<ul>
+<li>header(设置发送请求的请求头）</li>
+<li>timeout</li>
+<li>params（设置发送请求的参数）</li>
+<li>allow_redirects（是否要获取到最终到达的url的request）</li>
+<li>stream（是否要获取原始嵌套字）</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> requests</div><div class="line">url = targer_url</div><div class="line">params = &#123;<span class="string">'key1'</span>: <span class="string">'value1'</span>, <span class="string">'key2'</span>: <span class="string">'value2'</span>&#125;</div><div class="line"><span class="comment"># 请求头</span></div><div class="line">headers = &#123;</div><div class="line">    <span class="string">'user-agent'</span>: <span class="string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36'</span></div><div class="line">&#125;</div><div class="line">＃ 超时设置(以秒为单位）</div><div class="line">timeout = <span class="number">30</span></div><div class="line">allow_redirects = <span class="keyword">True</span></div><div class="line">request = requests.get(url, headers=headers, timeout=timeout, allow_redirects=allow_redirects, params=params)</div></pre></td></tr></table></figure>
+<ul>
+<li>requests.get/post返回对象</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> requests</div><div class="line">request = requests.get(url)</div><div class="line"><span class="string">'''</span></div><div class="line">这里说明的方法为request变量</div><div class="line">'''</div><div class="line"><span class="comment"># 请求的完整url，此处会将get请求的参数也添加到url后方</span></div><div class="line">request_url = request.url</div><div class="line"><span class="comment"># 请求状态码</span></div><div class="line">request_code = request.status_code</div><div class="line"><span class="comment"># 返回的正文</span></div><div class="line">request_content = request.content</div><div class="line"><span class="comment"># 编码</span></div><div class="line">request_encoding = request.encoding</div><div class="line"><span class="comment"># 头</span></div><div class="line">request_header = request.header</div></pre></td></tr></table></figure>
+<h3 id="编码问题"><a href="#编码问题" class="headerlink" title="编码问题"></a>编码问题</h3><p>requests本身不难，但是有一点非常坑的是它的编码问题，看两个例子即可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="comment"># 设置请求头</span></div><div class="line">headers = &#123;</div><div class="line">    <span class="string">'user-agent'</span>: <span class="string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36'</span></div><div class="line">&#125;</div><div class="line"><span class="comment"># 发送请求</span></div><div class="line">request = requests.get(<span class="string">"http://software.nju.edu.cn"</span>, headers=headers)</div><div class="line"><span class="comment"># 打印响应</span></div><div class="line"><span class="keyword">print</span> request.content</div></pre></td></tr></table></figure>
+<p>如下为结果：</p>
+<p><img src="/images/requests/software_nju_edu_cn_response.png" alt="response from software.nju.edu.cn"></p>
+<p>可以发现此时的中文仍然是正确的中文，编码方式为utf-8，此时并没有问题，然而当尝试了一下<strong>www.sohu.com</strong>，如下为结果</p>
+<p><img src="/images/requests/sohu_response.png" alt="response from sohu.com"></p>
+<p>是的！没错！中文显示为乱码了！图中红色框中的即为原因，sohu的主页的编码是用GBK！而requests类库从说明中可以发现应该能够自动识别编码，但是却识别不出来GBK，这是为什么呢？尝试了下<code>print request.encoding</code>发现打印出来的编码为<code>ISO-8859-1</code>，果然发现解析的编码并不是<code>GBK</code>！在查询了资料过后终于发现原来可以这样手动指定编码方式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">request.encoding = GB2312</div><div class="line"><span class="keyword">print</span> request.content</div></pre></td></tr></table></figure>
+<p>是的你没有看错，就是<code>GB2312</code>而不是<code>GBK</code>，应该是规定了编码的写法，添加过后会发现中文恢复了正常。那么问题又来了，在requests.get(url)之前我们又怎么能知道该url的编码方式呢？</p>
+<ul>
+<li>一种方式为直接获取<code>meta</code>标签，获取其中的charset属性，然后如果为<code>GBK</code>编码的话则修改为<code>GB2312</code>，这也是大多数网站教程上的做法，当然是正确的，但是略显麻烦。</li>
+<li>那么就有了下面始终方式：经过自我的尝试，针对<code>GBK</code>编码方式，我们能够使用<strong><code>request.encoding = None</code></strong>，是的你没看错，直接情况requests类库的自识别编码方式即可！</li>
+</ul>
+<p>至此编码方式解决。</p>
+<h3 id="requests-header-url"><a href="#requests-header-url" class="headerlink" title="requests.header(url)"></a>requests.header(url)</h3><p>在网站检查中对于环链的检测最容易做法便是通过requests.header请求，只获取响应头就可知道该链接是否可正常访问，效率比之get/post请求快很多。</p>
+<h2 id="BeautifulSoup4类库"><a href="#BeautifulSoup4类库" class="headerlink" title="BeautifulSoup4类库"></a>BeautifulSoup4类库</h2><p>这是Python解析html/xml等格式编码的最常用的类库了，十分类似于java中的jsoup。</p>
+<h3 id="基本使用-1"><a href="#基本使用-1" class="headerlink" title="基本使用"></a>基本使用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</div><div class="line"></div><div class="line">request = requests.get(<span class="string">"http://software.nju.edu.cn"</span>)</div><div class="line"><span class="comment"># 如果请求成功</span></div><div class="line"><span class="keyword">if</span> request != null <span class="keyword">and</span> request.status_code == <span class="number">200</span>:</div><div class="line">	<span class="comment"># 正文内容</span></div><div class="line">	request.encoding = <span class="keyword">None</span></div><div class="line">	content = request.content</div><div class="line">	<span class="comment"># 初始化BeautifulSoup</span></div><div class="line">	soup = BeautifulSoup(content, <span class="string">'html.parser'</span>)</div></pre></td></tr></table></figure>
+<p>如上即获取到了BeautifulSoup的实例，可以通过BeautifulSoup进行标签的分析，此处较为简单，详情可以参考BeautifulSoup的<a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/" target="_blank" rel="external">说明网站</a></p>
+<h2 id="附录：爬虫系统中可能用到的一些方法"><a href="#附录：爬虫系统中可能用到的一些方法" class="headerlink" title="附录：爬虫系统中可能用到的一些方法"></a>附录：爬虫系统中可能用到的一些方法</h2><h3 id="url拼接"><a href="#url拼接" class="headerlink" title="url拼接"></a>url拼接</h3><p>很多编程语言中都有url的拼接，大多有像js中的<code>url.resolve(new_url)</code>这类方法，但是python中并没有自带的这种方法，因此这也是中很坑爹的情况，特别是当我们需要爬深度为n(n&gt;=2)的时候，我们需要首先从首页的<code>&lt;a&gt;</code>标签开始爬，然后再爬所有获取到的<code>&lt;a&gt;</code>标签中的链接。这标签链接有完整的绝对路径，也有相对路径，那么python到底怎么才能拼接url，实现类似<code>resolve</code>方法呢？经过多方查询资料和尝试，终于发现网上有个方法较为成功：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">resolve</span><span class="params">(base, url)</span>:</span></div><div class="line">    url1 = urljoin(base, url)</div><div class="line">    arr = urlparse(url1)</div><div class="line">    path = normpath(arr[<span class="number">2</span>])</div><div class="line">    <span class="keyword">return</span> urlunparse((arr.scheme, arr.netloc, path, arr.params, arr.query, arr.fragment))</div></pre></td></tr></table></figure>
+<p>然而这个方法也是有漏洞的。若resolve方法中的两个参数分别为：base是完整的路径（比如<code>http://aaa/bbb/ccc.html</code>，url是相对路径（比如 <code>./ddd/eee/fff.html</code>)，当然这种情况下是正确的，但是！如果base是<code>http://aaa/bbb/ccc.html/</code>，对，只是末尾多了一个’/‘，但是结果却是不同的，所以最好的方法还要检测一下是否末尾有’/‘这个问题。</p>
+<h2 id="获取域名"><a href="#获取域名" class="headerlink" title="获取域名"></a>获取域名</h2><p>域名也是很常用的一个属性，能够判断是否同源等，因此这边写出获取域名的方法，比较容易。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getUrlDomain</span><span class="params">(url)</span>:</span></div><div class="line">    <span class="keyword">if</span> url <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">    <span class="keyword">if</span> len(url) == <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">    pattern = re.compile(<span class="string">r'^http(s)?://'</span>)</div><div class="line">    res = re.sub(pattern, <span class="string">''</span>, url)</div><div class="line">    res = re.sub(re.compile(<span class="string">r'/(\S)*'</span>), <span class="string">''</span>, res)</div><div class="line">    <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+<p>暂时先写到这了～</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python2-7/" rel="tag">#python2.7</a>
+          
+            <a href="/tags/CentOS/" rel="tag">#CentOS</a>
+          
+            <a href="/tags/python-requests/" rel="tag">#python requests</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/05/server-initialize/" rel="next" title="Python爬虫（一）—— 配置服务器">
+                <i class="fa fa-chevron-left"></i> Python爬虫（一）—— 配置服务器
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar/ez.jpg"
+               alt="yqzhong" />
+          <p class="site-author-name" itemprop="name">yqzhong</p>
+          <p class="site-description motion-element" itemprop="description">一个学生的逆袭道路</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#requests类库"><span class="nav-number">1.</span> <span class="nav-text">requests类库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本使用"><span class="nav-number">1.1.</span> <span class="nav-text">基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编码问题"><span class="nav-number">1.2.</span> <span class="nav-text">编码问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#requests-header-url"><span class="nav-number">1.3.</span> <span class="nav-text">requests.header(url)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BeautifulSoup4类库"><span class="nav-number">2.</span> <span class="nav-text">BeautifulSoup4类库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本使用-1"><span class="nav-number">2.1.</span> <span class="nav-text">基本使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录：爬虫系统中可能用到的一些方法"><span class="nav-number">3.</span> <span class="nav-text">附录：爬虫系统中可能用到的一些方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#url拼接"><span class="nav-number">3.1.</span> <span class="nav-text">url拼接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取域名"><span class="nav-number">4.</span> <span class="nav-text">获取域名</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yqzhong</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
