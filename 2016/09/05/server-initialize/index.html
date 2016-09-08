@@ -857,7 +857,7 @@ function showTime(Counter) {
 				if (results.length == 0) {
 					var text = $(document.getElementById(url)).text();
 					if(text.indexOf("|") == -1) {
-						var content = '&nbsp; | &nbsp;0 ' + $(document.getElementById(url)).text();
+						var content = ' | 0 ' + $(document.getElementById(url)).text();
 						$(document.getElementById(url)).text(content);
 					}
 					return;
