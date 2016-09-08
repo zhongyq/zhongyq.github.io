@@ -620,32 +620,30 @@
 <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
 <script>AV.initialize("m2yfnJAjE8SGNRquPagWQpWB-gzGzoHsz", "GB7Fk5hNRDt7WsXRcWA7Okrm");</script>
 <script>
-var urls = [];
 function showTime(Counter) {
   var query = new AV.Query(Counter);
   $(".leancloud_visitors").each(function() {
     var url = $(this).attr("id").trim();
-    if(urls.indexOf(url) === -1) {
-      urls.push(url);
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length == 0) {
-            var content = '0 ' + $(document.getElementById(url)).text();
-            $(document.getElementById(url)).text(content);
-            return;
-          }
+    urls.push(url);
+    query.equalTo("url", url);
+    query.find({
+      success: function(results) {
+        if (results.length == 0) {
+          var content = '0 ' + $(document.getElementById(url)).text();
+          $(document.getElementById(url)).text(content);
+          return;
+        }else {
           for (var i = 0; i < results.length; i++) {
             var object = results[i];
             var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
             $(document.getElementById(url)).text(content);
           }
-        },
-        error: function(object, error) {
-          console.log("Error: " + error.code + " " + error.message);
         }
-      });
-    }
+      },
+      error: function(object, error) {
+        console.log("Error: " + error.code + " " + error.message);
+      }
+    });
   });
 }
 
