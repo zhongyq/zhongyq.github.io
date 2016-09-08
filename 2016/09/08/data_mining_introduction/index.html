@@ -313,8 +313,8 @@
           
           
              <span id="/2016/09/08/data_mining_introduction/" class="leancloud_visitors" data-flag-title="数据挖掘简介">
-                阅读次数
-               <!-- &nbsp; | &nbsp; --> 
+               <!-- &nbsp; | &nbsp; -->
+              阅读次数
                <!-- <span class="post-meta-item-icon"> -->
                <!--  <i class="fa fa-eye"></i> -->
                <!-- </span> -->
@@ -1047,14 +1047,21 @@ function showTime(Counter) {
     query.find({
       success: function(results) {
         if (results.length == 0) {
-          var content = $(document.getElementById(url)).text() + ': 0';
-          $(document.getElementById(url)).text(content);
+          var temp = $(document.getElementById(url)).text();
+          if(temp.indexOf("|") == -1) {
+            var content = '0 ' + $(document.getElementById(url)).text();
+            $(document.getElementById(url)).text(content);
+          }
           return;
-        }
-        for (var i = 0; i < results.length; i++) {
-          var object = results[i];
-          var content = $(document.getElementById(url)).text() + ': ' + object.get('time');
-          $(document.getElementById(url)).text(content);
+        }else {
+          for (var i = 0; i < results.length; i++) {
+            var temp = $(document.getElementById(url)).text();
+            if(temp.indexOf("|") == -1) {
+              var object = results[i];
+              var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+              $(document.getElementById(url)).text(content);
+            }
+          }
         }
       },
       error: function(object, error) {
@@ -1079,7 +1086,7 @@ function addCount(Counter) {
         counter.increment("time");
         counter.save(null, {
           success: function(counter) {
-            var content = $(document.getElementById(url)).text() + ': ' + counter.get('time');
+            var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
             $(document.getElementById(url)).text(content);
           },
           error: function(counter, error) {
@@ -1094,7 +1101,7 @@ function addCount(Counter) {
         newcounter.save(null, {
           success: function(newcounter) {
               console.log("newcounter.get('time')="+newcounter.get('time'));
-            var content = $(document.getElementById(url)).text() + ': ' + newcounter.get('time');
+            var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
             $(document.getElementById(url)).text(content);
           },
           error: function(newcounter, error) {
