@@ -728,21 +728,14 @@ function showTime(Counter) {
     query.find({
       success: function(results) {
         if (results.length == 0) {
-          var temp = $(document.getElementById(url)).text();
-          if(temp.indexOf("|") == -1) {
-            var content = ' | 0 ' + $(document.getElementById(url)).text();
-            $(document.getElementById(url)).text(content);
-          }
+          var content = '0 ' + $(document.getElementById(url)).text();
+          $(document.getElementById(url)).text(content);
           return;
-        }else {
-          for (var i = 0; i < results.length; i++) {
-            var temp = $(document.getElementById(url)).text();
-            if(temp.indexOf("|") == -1) {
-              var object = results[i];
-              var content = ' | ' + object.get('time') + ' ' + $(document.getElementById(url)).text();
-              $(document.getElementById(url)).text(content);
-            }
-          }
+        }
+        for (var i = 0; i < results.length; i++) {
+          var object = results[i];
+          var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+          $(document.getElementById(url)).text(content);
         }
       },
       error: function(object, error) {
@@ -805,6 +798,7 @@ $(function() {
   }
 }); 
 </script>
+  
   
 </body>
 </html>
