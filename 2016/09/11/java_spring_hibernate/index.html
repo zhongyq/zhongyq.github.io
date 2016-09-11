@@ -1,0 +1,814 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,spring,hibernate," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ZhOnG" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="本文主要介绍了通过Eclipse/IntelliJ IDEA创建一个maven工程，使用spring+hibernate的框架实现一个java web项目。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Web之配置Spring + Hibernate">
+<meta property="og:url" content="http://yoursite.com/2016/09/11/java_spring_hibernate/index.html">
+<meta property="og:site_name" content="ZhOnG">
+<meta property="og:description" content="本文主要介绍了通过Eclipse/IntelliJ IDEA创建一个maven工程，使用spring+hibernate的框架实现一个java web项目。">
+<meta property="og:image" content="http://yoursite.com/images/spring_hibernate/create_maven_project1.png">
+<meta property="og:image" content="http://yoursite.com/images/spring_hibernate/initial_struct.png">
+<meta property="og:image" content="http://yoursite.com/images/spring_hibernate/hibernate_result.png">
+<meta property="og:updated_time" content="2016-09-11T14:15:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java Web之配置Spring + Hibernate">
+<meta name="twitter:description" content="本文主要介绍了通过Eclipse/IntelliJ IDEA创建一个maven工程，使用spring+hibernate的框架实现一个java web项目。">
+<meta name="twitter:image" content="http://yoursite.com/images/spring_hibernate/create_maven_project1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/11/java_spring_hibernate/"/>
+
+
+  <title> Java Web之配置Spring + Hibernate | ZhOnG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">ZhOnG</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">随缘笔记</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java Web之配置Spring + Hibernate
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-11T19:09:09+08:00" content="2016-09-11">
+              2016-09-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java-Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Java Web</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/11/java_spring_hibernate/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/11/java_spring_hibernate/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+          
+          
+              <span id="/2016/09/11/java_spring_hibernate/" class="leancloud_visitors" data-flag-title="Java Web之配置Spring + Hibernate">
+              &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+               <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Step-1-创建java-web的maven工程"><a href="#Step-1-创建java-web的maven工程" class="headerlink" title="Step 1: 创建java web的maven工程"></a>Step 1: 创建java web的maven工程</h2><p>首先创建maven工程，主要模版使用下图所示的maven。</p>
+<p><img src="/images/spring_hibernate/create_maven_project1.png" alt="create maven project"></p>
+<p>其他group id等自行填写即可。</p>
+<p>创建完成后，可以看到默认初始的工程结构：<br><img src="/images/spring_hibernate/initial_struct.png" alt="maven project structure"></p>
+<h2 id="Step-2-配置maven依赖"><a href="#Step-2-配置maven依赖" class="headerlink" title="Step 2: 配置maven依赖"></a>Step 2: 配置maven依赖</h2><p>创建完maven工程后，我们打开自带的pom.xml文件，在<code>&lt;dependencies&gt;&lt;dependencies/&gt;</code>之间添加如下依赖：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line">&lt;!-- spring 框架 --&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;org.springframework&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;spring-core&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;3.2.15.RELEASE&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;org.springframework&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;spring-context&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;3.2.15.RELEASE&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;org.springframework&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;spring-aop&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;3.2.15.RELEASE&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;org.springframework&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;spring-tx&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;3.2.15.RELEASE&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;org.springframework&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;spring-orm&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;3.2.15.RELEASE&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;org.aspectj&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;1.7.3&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;c3p0&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;c3p0&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;0.9.1.2&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;!-- mysql &amp; hibernate --&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;mysql&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;5.1.33&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;org.hibernate&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;hibernate-core&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;4.1.0.Final&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;org.hibernate&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;hibernate-c3p0&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;4.1.0.Final&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;org.hibernate&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;hibernate-ehcache&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;4.1.0.Final&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;!-- 将po转为json,便于打印 --&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;fastjson&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;1.2.14&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">  &lt;!-- jstl需要的jar包 --&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;jstl&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;jstl&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;1.2&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;!-- log4j需要的jar包 --&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;log4j&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;log4j&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;1.2.17&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+<p>其中<code>log4j</code>包用于打印语句至命令行便于调试，<code>fastjson</code>包用于可以直接将po转换为json便于查看内容，<code>jstl</code>便于jsp页面中自定义标签的使用，这三个依赖为可选，其余则为spring+hibernate所必需的。</p>
+<h2 id="添加spring-hibernate的配置文件"><a href="#添加spring-hibernate的配置文件" class="headerlink" title="添加spring+hibernate的配置文件"></a>添加spring+hibernate的配置文件</h2><p>在<code>main/resource</code>文件夹下添加一个数据库配置文件，取名为<code>jdbc.properties</code>，内容如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">jdbcUrl=jdbc:mysql://your_ip:mysql_port/database_name?autoReconnect=true</div><div class="line">driverClass=com.mysql.jdbc.Driver</div><div class="line">user=mysql_username</div><div class="line">password=mysql_password</div></pre></td></tr></table></figure>
+<p>同样在相同目录下添加<code>applicationContext.xml</code>文件，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</div><div class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</div><div class="line">       xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;</div><div class="line">       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;</div><div class="line">       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</div><div class="line">       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans</div><div class="line">                        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd</div><div class="line">                        http://www.springframework.org/schema/context</div><div class="line">                        http://www.springframework.org/schema/context/spring-context-3.0.xsd</div><div class="line">                        http://www.springframework.org/schema/aop</div><div class="line">                        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd</div><div class="line">                        http://www.springframework.org/schema/tx</div><div class="line">                        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd&quot;&gt;</div><div class="line"></div><div class="line">    &lt;context:property-placeholder location=&quot;classpath:jdbc.properties&quot;/&gt;</div><div class="line"></div><div class="line">    &lt;context:component-scan base-package=&quot;your_package&quot;&gt;&lt;/context:component-scan&gt;</div><div class="line"></div><div class="line">    &lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;</div><div class="line">        &lt;property name=&quot;jdbcUrl&quot; value=&quot;$&#123;jdbcUrl&#125;&quot;&gt;&lt;/property&gt;</div><div class="line">        &lt;property name=&quot;driverClass&quot; value=&quot;$&#123;driverClass&#125;&quot;&gt;&lt;/property&gt;</div><div class="line">        &lt;property name=&quot;user&quot; value=&quot;$&#123;user&#125;&quot;&gt;&lt;/property&gt;</div><div class="line">        &lt;property name=&quot;password&quot; value=&quot;$&#123;password&#125;&quot;&gt;&lt;/property&gt;</div><div class="line">        &lt;property name=&quot;initialPoolSize&quot; value=&quot;3&quot;&gt;&lt;/property&gt;</div><div class="line">        &lt;property name=&quot;minPoolSize&quot; value=&quot;3&quot;&gt;&lt;/property&gt;</div><div class="line">        &lt;property name=&quot;maxPoolSize&quot; value=&quot;5&quot;&gt;&lt;/property&gt;</div><div class="line">        &lt;property name=&quot;acquireIncrement&quot; value=&quot;3&quot;&gt;&lt;/property&gt;</div><div class="line">        &lt;property name=&quot;maxStatements&quot; value=&quot;8&quot;&gt;&lt;/property&gt;</div><div class="line">        &lt;property name=&quot;maxStatementsPerConnection&quot; value=&quot;5&quot;&gt;&lt;/property&gt;</div><div class="line">        &lt;property name=&quot;maxIdleTime&quot; value=&quot;1800&quot;&gt;&lt;/property&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line"></div><div class="line">    &lt;bean id=&quot;sessionFactory&quot; class=&quot;org.springframework.orm.hibernate4.LocalSessionFactoryBean&quot;&gt;</div><div class="line">        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;</div><div class="line">        &lt;property name=&quot;hibernateProperties&quot;&gt;</div><div class="line">            &lt;props&gt;</div><div class="line">                &lt;prop key=&quot;hibernate.dialect&quot;&gt;org.hibernate.dialect.MySQLDialect&lt;/prop&gt;</div><div class="line">                &lt;prop key=&quot;hibernate.show_sql&quot;&gt;true&lt;/prop&gt;</div><div class="line">                &lt;prop key=&quot;hibernate.hbm2ddl.auto&quot;&gt;update&lt;/prop&gt;</div><div class="line">                &lt;prop key=&quot;hibernate.cache.use_second_level_cache&quot;&gt;true&lt;/prop&gt;</div><div class="line">                &lt;prop key=&quot;hibernate.cache.region.factory_class&quot;&gt;org.hibernate.cache.ehcache.EhCacheRegionFactory&lt;/prop&gt;</div><div class="line">            &lt;/props&gt;</div><div class="line">        &lt;/property&gt;</div><div class="line">        &lt;property name=&quot;packagesToScan&quot;&gt;</div><div class="line">            &lt;list&gt;</div><div class="line">                &lt;value&gt;your_package&lt;/value&gt;</div><div class="line">            &lt;/list&gt;</div><div class="line">        &lt;/property&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line"></div><div class="line">    &lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.orm.hibernate4.HibernateTransactionManager&quot;&gt;</div><div class="line">        &lt;property name=&quot;sessionFactory&quot; ref=&quot;sessionFactory&quot;&gt;&lt;/property&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line"></div><div class="line">    &lt;tx:advice id=&quot;txAdvice&quot; transaction-manager=&quot;transactionManager&quot;&gt;</div><div class="line">        &lt;tx:attributes&gt;</div><div class="line">            &lt;tx:method name=&quot;*&quot; propagation=&quot;REQUIRED&quot; isolation=&quot;READ_COMMITTED&quot;/&gt;</div><div class="line">        &lt;/tx:attributes&gt;</div><div class="line">    &lt;/tx:advice&gt;</div><div class="line"></div><div class="line">    &lt;aop:config&gt;</div><div class="line">        &lt;aop:pointcut id=&quot;txPointcut&quot; expression=&quot;execution(* your_package.dao.*.*(..))&quot; /&gt;</div><div class="line">        &lt;aop:advisor pointcut-ref=&quot;txPointcut&quot; advice-ref=&quot;txAdvice&quot;/&gt;</div><div class="line">    &lt;/aop:config&gt;</div><div class="line"></div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure>
+<p>其中只要将配置文件中出现的<code>your_package</code>更改为自己的目录即可。</p>
+<p>至此spring+hibernate的配置已经完成。</p>
+<h3 id="附录："><a href="#附录：" class="headerlink" title="附录："></a>附录：</h3><ul>
+<li>关于<code>dataSource</code>:</li>
+</ul>
+<p><code>jdbc.properties</code>中的变量是通过以下命令引入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;context:property-placeholder location=&quot;classpath:jdbc.properties&quot;/&gt;</div></pre></td></tr></table></figure>
+<p>当然，如果<strong>不想创建<code>jdbc.properties</code></strong>文件，则只需要将这句话去掉，并将<code>&lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;</code>下的<code>&lt;property&gt;</code>标签中<code>value</code>属性中<code>${}</code>的改为<code>jdbc.properties</code>之前配置的值即可。<code>dataSource</code>这个bean本身只是一个数据库连接池，能够定义最大连接数和最小连接数等属性。</p>
+<ul>
+<li>关于<code>sessionFactory</code></li>
+</ul>
+<p>sessionFactory是用于产生数据库session，也因此会用到<code>dataSource</code>，后定义了hibernate的部分属性，如使用方言等。</p>
+<ul>
+<li>关于<code>transaction</code></li>
+</ul>
+<p>mysql数据库中，有这事务这一概念，我们能够在代码中手动创建事务并提交，但是这有可能会产生大量的重复的代码，而这里spring则为我们提供了配置，能够自动在执行方法前创建事务并在结束时提交，这就是<code>sessionFactory</code>后面的配置文件中配置内容的作用。</p>
+<h2 id="代码添加model（即数据库中的一张表）"><a href="#代码添加model（即数据库中的一张表）" class="headerlink" title="代码添加model（即数据库中的一张表）"></a>代码添加model（即数据库中的一张表）</h2><p>创建一个<code>model</code>包，并在其中创建一个类名为<code>Music</code>的类，来显示一首音乐的信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">import java.util.Date;</div><div class="line">import javax.persistence.Column;</div><div class="line">import javax.persistence.Entity;</div><div class="line">import javax.persistence.GeneratedValue;</div><div class="line">import javax.persistence.GenerationType;</div><div class="line">import javax.persistence.Id;</div><div class="line"></div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by zhongyq on 16/9/11.</div><div class="line"> */</div><div class="line">@Entity</div><div class="line">public class Music &#123;</div><div class="line">    @Id</div><div class="line">    @GeneratedValue(strategy=GenerationType.IDENTITY)</div><div class="line">    private Long id;</div><div class="line"></div><div class="line">    @Column(length=64)</div><div class="line">    private String musicName;</div><div class="line"></div><div class="line">    private Date publishTime;</div><div class="line"></div><div class="line">    private String singer;</div><div class="line"></div><div class="line">    public Long getId() &#123;</div><div class="line">        return id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String getMusicName() &#123;</div><div class="line">        return musicName;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setMusicName(String musicName) &#123;</div><div class="line">        this.musicName = musicName;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Date getPublishTime() &#123;</div><div class="line">        return publishTime;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setPublishTime(Date publishTime) &#123;</div><div class="line">        this.publishTime = publishTime;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String getSinger() &#123;</div><div class="line">        return singer;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setSinger(String singer) &#123;</div><div class="line">        this.singer = singer;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<p>下面则添加一个<code>dao</code>包，用于数据库接口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">import model.Music;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by zhongyq on 16/9/11.</div><div class="line"> */</div><div class="line">public interface MusicDao &#123;</div><div class="line"></div><div class="line">    public Music getMusicById(Long id);</div><div class="line">    public Music getMusicByName(String musicName);</div><div class="line">    public void save(Music m);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<p>下面添加一个<code>daoImpl</code>包用于实现上述定义的数据库接口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">import org.hibernate.Criteria;</div><div class="line">import org.hibernate.Session;</div><div class="line">import org.hibernate.SessionFactory;</div><div class="line">import org.hibernate.criterion.Order;</div><div class="line">import org.hibernate.criterion.Restrictions;</div><div class="line">import org.springframework.beans.factory.annotation.Autowired;</div><div class="line">import org.springframework.stereotype.Repository;</div><div class="line"></div><div class="line"></div><div class="line">import dao.MusicDao;</div><div class="line">import model.Music;</div><div class="line"></div><div class="line">import java.util.List;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by zhongyq on 16/9/11.</div><div class="line"> */</div><div class="line"></div><div class="line">@Repository</div><div class="line">public class MusicDaoImpl implements MusicDao &#123;</div><div class="line">    @Autowired</div><div class="line">    private SessionFactory sessionFactory;</div><div class="line"></div><div class="line"></div><div class="line">    public Music getMusicById(Long id) &#123;</div><div class="line">        Session session=sessionFactory.getCurrentSession();</div><div class="line">        Music music=(Music)session.get(Music.class,id);</div><div class="line">        return music;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Music getMusicByName(String musicName) &#123;</div><div class="line">        Session session=sessionFactory.getCurrentSession();</div><div class="line">        Criteria criteria=session.createCriteria(Music.class)</div><div class="line">                .add(Restrictions.eq(&quot;musicName&quot;, musicName))</div><div class="line">                .addOrder(Order.asc(&quot;time&quot;));</div><div class="line">        @SuppressWarnings(&quot;unchecked&quot;)</div><div class="line">        List&lt;Music&gt; results=(List&lt;Music&gt;)criteria.list();</div><div class="line">        if(results.size() &gt; 0) &#123;</div><div class="line">            return results.get(0);</div><div class="line">        &#125;else &#123;</div><div class="line">            return null;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void save(Music m) &#123;</div><div class="line">        Session session=sessionFactory.getCurrentSession();</div><div class="line">        session.saveOrUpdate(m);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其中<code>@Repository</code>这个注解用于表明此类是一个DAO。</p>
+<hr>
+<p>下面则写用于测试的类:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">import java.util.List;</div><div class="line">import java.text.SimpleDateFormat;</div><div class="line">import dao.MusicDao;</div><div class="line">import model.Music;</div><div class="line">import org.springframework.context.ApplicationContext;</div><div class="line">import org.springframework.context.support.ClassPathXmlApplicationContext;</div><div class="line">import com.alibaba.fastjson.JSONObject;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by zhongyq on 16/9/11.</div><div class="line"> */</div><div class="line">public class test &#123;</div><div class="line">    public static void main(String[] args) throws Exception &#123;</div><div class="line"></div><div class="line">        ApplicationContext context=new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);</div><div class="line">        MusicDao musicDao=context.getBean(MusicDao.class);</div><div class="line">        SimpleDateFormat format=new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</div><div class="line"></div><div class="line">        Music music = new Music();</div><div class="line">        music.setMusicName(&quot;abc&quot;);</div><div class="line">        music.setPublishTime(format.parse(&quot;2016-09-11&quot;));</div><div class="line">        music.setSinger(&quot;def&quot;);</div><div class="line">        musicDao.save(music);</div><div class="line"></div><div class="line">        Music newMusic = musicDao.getMusicByName(&quot;abc&quot;);</div><div class="line">        System.out.println(newMusic.getMusicName() + &quot;;&quot; + newMusic.getSinger());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>显示结果如下图：</p>
+<p><img src="/images/spring_hibernate/hibernate_result.png" alt="hibernate result"></p>
+<p>说明成功！</p>
+<p>暂时先写到这吧～</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/spring/" rel="tag">#spring</a>
+          
+            <a href="/tags/hibernate/" rel="tag">#hibernate</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/08/data_mining_introduction/" rel="next" title="数据挖掘简介">
+                <i class="fa fa-chevron-left"></i> 数据挖掘简介
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/11/java_spring_hibernate/"
+           data-title="Java Web之配置Spring + Hibernate" data-url="http://yoursite.com/2016/09/11/java_spring_hibernate/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar/ez.jpg"
+               alt="yqzhong" />
+          <p class="site-author-name" itemprop="name">yqzhong</p>
+          <p class="site-description motion-element" itemprop="description">一个学生的逆袭道路</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-1-创建java-web的maven工程"><span class="nav-number">1.</span> <span class="nav-text">Step 1: 创建java web的maven工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-2-配置maven依赖"><span class="nav-number">2.</span> <span class="nav-text">Step 2: 配置maven依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加spring-hibernate的配置文件"><span class="nav-number">3.</span> <span class="nav-text">添加spring+hibernate的配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#附录："><span class="nav-number">3.1.</span> <span class="nav-text">附录：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码添加model（即数据库中的一张表）"><span class="nav-number">4.</span> <span class="nav-text">代码添加model（即数据库中的一张表）</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yqzhong</span>
+  <br />
+
+  <span id="busuanzi_container_site_pv">
+   Total visited <span id="busuanzi_value_site_pv"></span> times
+  </span>
+
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yqzhong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("ulacx6EO7bIa5RBt9L9OTmCM-gzGzoHsz", "zls3E5Gs0a1oCNGyFDiT2f9l");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+  
+</body>
+</html>
