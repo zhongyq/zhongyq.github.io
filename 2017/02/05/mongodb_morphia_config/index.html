@@ -1,0 +1,802 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,mongodb," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ZhOnG" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="本文主要介绍spring框架整合mongodb的orm框架morphia。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring & mongodb(morphia)">
+<meta property="og:url" content="http://yoursite.com/2017/02/05/mongodb_morphia_config/index.html">
+<meta property="og:site_name" content="ZhOnG">
+<meta property="og:description" content="本文主要介绍spring框架整合mongodb的orm框架morphia。">
+<meta property="og:updated_time" content="2017-02-25T05:01:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring & mongodb(morphia)">
+<meta name="twitter:description" content="本文主要介绍spring框架整合mongodb的orm框架morphia。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/02/05/mongodb_morphia_config/"/>
+
+
+  <title> Spring & mongodb(morphia) | ZhOnG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">ZhOnG</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">随缘笔记</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Spring & mongodb(morphia)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-05T10:11:01+08:00" content="2017-02-05">
+              2017-02-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java-mongodb/" itemprop="url" rel="index">
+                    <span itemprop="name">Java mongodb</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/05/mongodb_morphia_config/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/05/mongodb_morphia_config/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+          
+          
+              <span id="/2017/02/05/mongodb_morphia_config/" class="leancloud_visitors" data-flag-title="Spring & mongodb(morphia)">
+              &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+               <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Step-1-Maven依赖"><a href="#Step-1-Maven依赖" class="headerlink" title="Step 1: Maven依赖"></a>Step 1: Maven依赖</h2><p>首先需要导入mongodb的依赖，然后再导入<a href="http://mongodb.github.io/morphia/" target="_blank" rel="external">morphia</a>框架，这是由于非结构化数据库如果没有对象关系映射，在较为复杂的项目中会非常繁琐，因此morphia起到了orm的功能。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mongodb<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mongo-java-driver<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;mongodb.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mongodb.morphia<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>morphia<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;morphia.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong><em>Note:</em></strong></p>
+<p>这里有个大坑，就是上述代码中的两个<figure class="highlight plain"><figcaption><span>com.mongodb.client.model.DBCollectionFind```类似的错误，这里我使用以下两个版本。</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
+<p><mongodb.version>3.2.2</mongodb.version></p>
+<p><morphia.version>1.0.1</morphia.version><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## Step 2: 配置spring-morphia.xml</div><div class="line"></div><div class="line">```xml</div><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line"></div><div class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</div><div class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</div><div class="line">       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd&quot;&gt;</div><div class="line">    &lt;bean id=&quot;mongoOptions&quot; class=&quot;com.mongodb.MongoOptions&quot;&gt;</div><div class="line">        &lt;property name=&quot;connectionsPerHost&quot; value=&quot;10&quot; /&gt;</div><div class="line">        &lt;!-- 连接超时时间(毫秒)，默认为10000 --&gt;</div><div class="line">        &lt;property name=&quot;connectTimeout&quot; value=&quot;10000&quot; /&gt;</div><div class="line">        &lt;!-- 是否创建一个finalize方法，以便在客户端没有关闭DBCursor的实例时，清理掉它。默认为true --&gt;</div><div class="line">        &lt;property name=&quot;cursorFinalizerEnabled&quot; value=&quot;true&quot; /&gt;</div><div class="line">        &lt;!-- 线程等待连接可用的最大时间(毫秒)，默认为120000 --&gt;</div><div class="line">        &lt;property name=&quot;maxWaitTime&quot; value=&quot;120000&quot; /&gt;</div><div class="line">        &lt;!-- 可等待线程倍数，默认为5.例如connectionsPerHost最大允许10个连接，则10*5=50个线程可以等待，更多的线程将直接抛异常 --&gt;</div><div class="line">        &lt;property name=&quot;threadsAllowedToBlockForConnectionMultiplier&quot; value=&quot;5&quot; /&gt;</div><div class="line">        &lt;!-- socket读写时超时时间(毫秒)，默认为0，不超时 --&gt;</div><div class="line">        &lt;property name=&quot;socketTimeout&quot; value=&quot;0&quot; /&gt;</div><div class="line">        &lt;!-- 是socket连接在防火墙上保持活动的特性，默认为false --&gt;</div><div class="line">        &lt;property name=&quot;socketKeepAlive&quot; value=&quot;false&quot; /&gt;</div><div class="line">        &lt;!-- 对应全局的WriteConcern.SAFE，默认为false --&gt;</div><div class="line">        &lt;property name=&quot;safe&quot; value=&quot;true&quot; /&gt;</div><div class="line">        &lt;!-- 对应全局的WriteConcern中的w，默认为0 --&gt;</div><div class="line">        &lt;property name=&quot;w&quot; value=&quot;0&quot; /&gt;</div><div class="line">        &lt;!-- 对应全局的WriteConcern中的wtimeout，默认为0 --&gt;</div><div class="line">        &lt;property name=&quot;wtimeout&quot; value=&quot;0&quot; /&gt;</div><div class="line">        &lt;!-- 对应全局的WriteConcern.FSYNC_SAFE，如果为真，每次写入要等待写入磁盘，默认为false --&gt;</div><div class="line">        &lt;property name=&quot;fsync&quot; value=&quot;false&quot; /&gt;</div><div class="line">        &lt;!-- 对应全局的WriteConcern.JOURNAL_SAFE，如果为真，每次写入要等待日志文件写入磁盘，默认为false --&gt;</div><div class="line">        &lt;property name=&quot;j&quot; value=&quot;false&quot; /&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line"></div><div class="line">    &lt;!-- 使用工厂创建mongo实例 --&gt;</div><div class="line">    &lt;bean id=&quot;mongo&quot; class=&quot;info.yqzhong.util.MongoFactoryBean&quot;&gt;</div><div class="line">        &lt;!-- mongoDB的配置对象 --&gt;</div><div class="line">        &lt;property name=&quot;mongoOptions&quot; ref=&quot;mongoOptions&quot;/&gt;</div><div class="line">        &lt;!-- 是否主从分离(读取从库)，默认为false，读写都在主库 --&gt;</div><div class="line">        &lt;property name=&quot;readSecondary&quot; value=&quot;false&quot;/&gt;</div><div class="line"></div><div class="line">        &lt;!-- 设定写策略，默认为WriteConcern.SAFE，优先级高于mongoOptions中的safe --&gt;</div><div class="line">        &lt;property name=&quot;writeConcern&quot; value=&quot;SAFE&quot;/&gt;</div><div class="line"></div><div class="line">        &lt;!-- 设定服务器列表，默认为localhost:27017 --&gt;</div><div class="line">        &lt;property name=&quot;serverStrings&quot;&gt;</div><div class="line">            &lt;array&gt;</div><div class="line">                &lt;value&gt;&#123;myIp&#125;:&#123;port&#125;&lt;/value&gt;</div><div class="line">            &lt;/array&gt;</div><div class="line">        &lt;/property&gt;</div><div class="line"></div><div class="line">        &lt;!-- collection的名称 --&gt;</div><div class="line">        &lt;property name=&quot;dbName&quot; value=&quot;&#123;dbName&#125;&quot;/&gt;</div><div class="line">        &lt;!-- 用户名和密码可以为空 --&gt;</div><div class="line">        &lt;property name=&quot;username&quot; value=&quot;&#123;username&#125;&quot;/&gt;</div><div class="line">        &lt;property name=&quot;password&quot; value=&quot;&#123;password&#125;&quot;/&gt;</div><div class="line"></div><div class="line">    &lt;/bean&gt;</div><div class="line"></div><div class="line">    &lt;!-- 使用工厂创建morphia实例，同时完成类映射操作 --&gt;</div><div class="line">    &lt;bean id=&quot;morphia&quot; class=&quot;info.yqzhong.util.MorphiaFactoryBean&quot; &gt;</div><div class="line">        &lt;!-- 指定要扫描的POJO包路径 --&gt;</div><div class="line">        &lt;property name=&quot;mapPackages&quot;&gt;</div><div class="line">            &lt;array&gt;</div><div class="line">                &lt;value&gt;info.yqzhong.entity&lt;/value&gt;</div><div class="line">            &lt;/array&gt;</div><div class="line">        &lt;/property&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line"></div><div class="line">    &lt;!-- 使用工厂创建datastore，同时完成index和caps的确认操作 --&gt;</div><div class="line">    &lt;bean id=&quot;datastore&quot; class=&quot;info.yqzhong.util.DatastoreFactoryBean&quot; &gt;</div><div class="line">        &lt;property name=&quot;morphia&quot; ref=&quot;morphia&quot;/&gt;</div><div class="line">        &lt;property name=&quot;mongo&quot; ref=&quot;mongo&quot;/&gt;</div><div class="line"></div><div class="line">        &lt;!-- collection的名称 --&gt;</div><div class="line">        &lt;property name=&quot;dbName&quot; value=&quot;&#123;dbName&#125;&quot;/&gt;</div><div class="line"></div><div class="line">        &lt;!-- 是否进行index和caps的确认操作，默认为flase --&gt;</div><div class="line">        &lt;property name=&quot;toEnsureIndexes&quot; value=&quot;true&quot;/&gt;</div><div class="line">        &lt;property name=&quot;isToEnsureCaps&quot; value=&quot;true&quot;/&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure></p>
+<p>将此xml加载到spring主配置文件下即可。</p>
+<h2 id="Step-3-工具类"><a href="#Step-3-工具类" class="headerlink" title="Step 3: 工具类"></a>Step 3: 工具类</h2><h3 id="MongoFactoryBean-java"><a href="#MongoFactoryBean-java" class="headerlink" title="MongoFactoryBean.java"></a>MongoFactoryBean.java</h3><p>这个类的主要作用是创建一个MongoClient(用于链接mongodb)，这里的部分参数均在上方配置文件中已经配置好。</p>
+<p><strong><em>注意！之前找资料时没有找到链接服务器上的mongodb，部分教程也有些小问题，用户名密码也不知道应该在哪里使用到，查了mongodb官方的api后应该在此处进行用户名密码的配置，而不是在Datastore那配置！！！</em></strong></p>
+<p>以下为代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> info.yqzhong.data.util;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.mongodb.*;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.config.AbstractFactoryBean;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by zhongyq on 17/2/4.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MongoFactoryBean</span> <span class="keyword">extends</span> <span class="title">AbstractFactoryBean</span>&lt;<span class="title">MongoClient</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 表示服务器列表</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> String[] serverStrings;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * mongo配置对象</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> MongoOptions mongoOptions;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 是否主从分离，默认为false</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> readSecondary = <span class="keyword">false</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     *</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> String username;</div><div class="line">    <span class="keyword">private</span> String password;</div><div class="line">    <span class="keyword">private</span> String dbName;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">public</span> String[] getServerStrings() &#123;</div><div class="line">        <span class="keyword">return</span> serverStrings;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setServerStrings</span><span class="params">(String[] serverStrings)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.serverStrings = serverStrings;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> MongoOptions <span class="title">getMongoOptions</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> mongoOptions;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMongoOptions</span><span class="params">(MongoOptions mongoOptions)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.mongoOptions = mongoOptions;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> WriteConcern <span class="title">getWriteConcern</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> writeConcern;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setWriteConcern</span><span class="params">(WriteConcern writeConcern)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.writeConcern = writeConcern;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isReadSecondary</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> readSecondary;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setReadSecondary</span><span class="params">(<span class="keyword">boolean</span> readSecondary)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.readSecondary = readSecondary;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUsername</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> username;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(String username)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.username = username;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> password;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.password = password;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDbName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> dbName;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDbName</span><span class="params">(String dbName)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.dbName = dbName;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> WriteConcern writeConcern = WriteConcern.SAFE;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> Class&lt;?&gt; getObjectType() &#123;</div><div class="line">        <span class="keyword">return</span> MongoClient.class;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> MongoClient <span class="title">createInstance</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        MongoClient mongo = initMongo();</div><div class="line"></div><div class="line">        <span class="comment">// read?</span></div><div class="line">        <span class="keyword">if</span> (readSecondary) &#123;</div><div class="line">            mongo.setReadPreference(ReadPreference.secondaryPreferred());</div><div class="line">        &#125;</div><div class="line">        mongo.setWriteConcern(writeConcern);</div><div class="line">        <span class="keyword">return</span> mongo;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * init mongoclient</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     * <span class="doctag">@throws</span> Exception</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> MongoClient <span class="title">initMongo</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">//根据条件创建mongo实例</span></div><div class="line">        MongoClient mongo = <span class="keyword">null</span>;</div><div class="line">        List&lt;MongoCredential&gt; credentialsList = <span class="keyword">new</span> ArrayList&lt;MongoCredential&gt;();</div><div class="line">        MongoCredential credentia = MongoCredential.createCredential(</div><div class="line">                username, dbName, password.toCharArray());</div><div class="line">        credentialsList.add(credentia);</div><div class="line"></div><div class="line">        List&lt;ServerAddress&gt; serverList = getServerList();</div><div class="line">        mongo = <span class="keyword">new</span> MongoClient(serverList.get(<span class="number">0</span>), credentialsList);</div><div class="line">        <span class="keyword">return</span> mongo;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * get mongodb address</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> List&lt;ServerAddress&gt; <span class="title">getServerList</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        List&lt;ServerAddress&gt; serverList = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">for</span> (String serverString: serverStrings) &#123;</div><div class="line">                String[] temp = serverString.split(<span class="string">":"</span>);</div><div class="line">                String host = temp[<span class="number">0</span>];</div><div class="line">                <span class="keyword">if</span> (temp.length &gt; <span class="number">2</span>) &#123;</div><div class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(</div><div class="line">                            <span class="string">"Invalid server address string:"</span> + serverString</div><div class="line">                    );</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span> (temp.length == <span class="number">2</span>) &#123;</div><div class="line">                    serverList.add(<span class="keyword">new</span> ServerAddress(host, Integer.parseInt(temp[<span class="number">1</span>])));</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    serverList.add(<span class="keyword">new</span> ServerAddress(host));</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> serverList;</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> Exception(</div><div class="line">                    <span class="string">"Error while converting serverString to ServerAddressList"</span>, e</div><div class="line">            );</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="MorphiaFactoryBean-java"><a href="#MorphiaFactoryBean-java" class="headerlink" title="MorphiaFactoryBean.java"></a>MorphiaFactoryBean.java</h3><p>这个类是用于配置morphia框架的，主要包括了实体类的扫描包指定，忽略的类指定等。与大部分教程类似，以下为代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> info.yqzhong.data.util;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.mongodb.morphia.Morphia;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.config.AbstractFactoryBean;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by zhongyq on 17/2/4.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MorphiaFactoryBean</span> <span class="keyword">extends</span> <span class="title">AbstractFactoryBean</span>&lt;<span class="title">Morphia</span>&gt; </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 要扫描的包</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> String[] mapPackages;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 要映射的类</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> String[] mapClasses;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 扫描包时，是否忽略不映射的类</div><div class="line">     * 这里按照Morphia的原始定义，默认设为false</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> ignoreInvalidClasses;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> String[] getMapPackages() &#123;</div><div class="line">        <span class="keyword">return</span> mapPackages;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMapPackages</span><span class="params">(String[] mapPackages)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.mapPackages = mapPackages;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> String[] getMapClasses() &#123;</div><div class="line">        <span class="keyword">return</span> mapClasses;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMapClasses</span><span class="params">(String[] mapClasses)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.mapClasses = mapClasses;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isIgnoreInvalidClasses</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> ignoreInvalidClasses;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIgnoreInvalidClasses</span><span class="params">(<span class="keyword">boolean</span> ignoreInvalidClasses)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.ignoreInvalidClasses = ignoreInvalidClasses;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> Class&lt;?&gt; getObjectType() &#123;</div><div class="line">        <span class="keyword">return</span> Morphia.class;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> Morphia <span class="title">createInstance</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        Morphia morphia = <span class="keyword">new</span> Morphia();</div><div class="line">        <span class="keyword">if</span> (mapPackages != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">for</span> (String packageName: mapPackages) &#123;</div><div class="line">                morphia.mapPackage(packageName, ignoreInvalidClasses);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (mapClasses != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">for</span> (String entityClass: mapClasses) &#123;</div><div class="line">                morphia.map(Class.forName(entityClass));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> morphia;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="DatastoreFactoryBean-java"><a href="#DatastoreFactoryBean-java" class="headerlink" title="DatastoreFactoryBean.java"></a>DatastoreFactoryBean.java</h3><p>此文件是用来创建morphia中最重要的一块datastore的类，所有对于数据库的增删改查几乎都可以使用datastore来进行操作。以下为代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> info.yqzhong.util;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.mongodb.morphia.Morphia;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.config.AbstractFactoryBean;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by zhongyq on 17/2/4.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MorphiaFactoryBean</span> <span class="keyword">extends</span> <span class="title">AbstractFactoryBean</span>&lt;<span class="title">Morphia</span>&gt; </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 要扫描的包</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> String[] mapPackages;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 要映射的类</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> String[] mapClasses;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 扫描包时，是否忽略不映射的类</div><div class="line">     * 这里按照Morphia的原始定义，默认设为false</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> ignoreInvalidClasses;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> String[] getMapPackages() &#123;</div><div class="line">        <span class="keyword">return</span> mapPackages;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMapPackages</span><span class="params">(String[] mapPackages)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.mapPackages = mapPackages;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> String[] getMapClasses() &#123;</div><div class="line">        <span class="keyword">return</span> mapClasses;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMapClasses</span><span class="params">(String[] mapClasses)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.mapClasses = mapClasses;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isIgnoreInvalidClasses</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> ignoreInvalidClasses;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIgnoreInvalidClasses</span><span class="params">(<span class="keyword">boolean</span> ignoreInvalidClasses)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.ignoreInvalidClasses = ignoreInvalidClasses;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> Class&lt;?&gt; getObjectType() &#123;</div><div class="line">        <span class="keyword">return</span> Morphia.class;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> Morphia <span class="title">createInstance</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        Morphia morphia = <span class="keyword">new</span> Morphia();</div><div class="line">        <span class="keyword">if</span> (mapPackages != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">for</span> (String packageName: mapPackages) &#123;</div><div class="line">                morphia.mapPackage(packageName, ignoreInvalidClasses);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (mapClasses != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">for</span> (String entityClass: mapClasses) &#123;</div><div class="line">                morphia.map(Class.forName(entityClass));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> morphia;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Step-4-使用"><a href="#Step-4-使用" class="headerlink" title="Step 4: 使用"></a>Step 4: 使用</h2><h3 id="创建实体类"><a href="#创建实体类" class="headerlink" title="创建实体类:"></a>创建实体类:</h3><h4 id="User-java"><a href="#User-java" class="headerlink" title="User.java"></a>User.java</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> info.yqzhong.entity;</div><div class="line"></div><div class="line"><span class="keyword">import</span> lombok.Data;</div><div class="line"><span class="keyword">import</span> org.bson.types.ObjectId;</div><div class="line"><span class="keyword">import</span> org.mongodb.morphia.annotations.Embedded;</div><div class="line"><span class="keyword">import</span> org.mongodb.morphia.annotations.Entity;</div><div class="line"><span class="keyword">import</span> org.mongodb.morphia.annotations.Id;</div><div class="line"><span class="keyword">import</span> org.mongodb.morphia.annotations.Reference;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by zhongyq on 17/2/4.</div><div class="line"> */</div><div class="line"><span class="meta">@Data</span></div><div class="line"><span class="meta">@Entity</span>(<span class="string">"user"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line">    <span class="meta">@Id</span></div><div class="line">    <span class="keyword">private</span> ObjectId id;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="keyword">private</span> String phone;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line">    <span class="meta">@Reference</span></div><div class="line">    <span class="keyword">private</span> Company company;</div><div class="line">    <span class="meta">@Embedded</span></div><div class="line">    <span class="keyword">private</span> Address address;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以上 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">```@Data```是```lombok.Data```，可以理解为自动生成set和get方法（这个可能会有坑！***当出现```boolean isMale```类似的属性的时候，可以内部生成的set方法名为```public void setMale(boolean male)```，但是当你Controller接收ajax参数时可能识别不出来此set方法，因为java默认会找```setIsMale(boolean male)```方法，此时，解决办法是自己手动写一个set方法。。。***）</div><div class="line"></div><div class="line">```@Id```是数据库集合的id，无法重复，可以指定任一属性，当然如上是mongodb自动生成的ObjectId为主键</div><div class="line"></div><div class="line">```@Reference```类似于外键的意思，***这里也有个坑！如果你的数据库仅仅只有java这一种语言才能访问，那么这样写没有问题,但是！！！如果你的数据库集合可能还会有其他的项目访问，举个例子来说：有一个python爬虫项目，将扫描结果存进了mongodb数据库，而使用java来访问该数据库集合进行数据分析和展示，此时，```@Reference```会报```java.lang.ClassCastException: org.bson.types.ObjectId cannot be cast to com.mongodb.DBRef```这个错，是由于python和java对于mongodb不同存储结构的问题！解决方法是将```@Reference```换为```@Reference(idOnly = true)```***</div><div class="line"></div><div class="line">```@Embedded```为内嵌的文档，可以理解为嵌入该文档的一个文档。</div><div class="line"></div><div class="line">#### Company.java (@Reference）</div><div class="line">和User.java一样的写法</div></pre></td></tr></table></figure></p>
+<p>package info.yqzhong.entity;</p>
+<p>import lombok.Data;<br>import org.bson.types.ObjectId;<br>import org.mongodb.morphia.annotations.Entity;<br>import org.mongodb.morphia.annotations.Id;</p>
+<p>/**</p>
+<ul>
+<li>Created by zhongyq on 17/2/4.<br>*/<br>@Data<br>@Entity(“company”)<br>public class Company {<br> @Id<br> private ObjectId id;<br> private String name;<br>}<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### Address.java (@Embedded)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>package info.yqzhong.entity;</p>
+<p>import lombok.Data;<br>import org.mongodb.morphia.annotations.Embedded;<br>import org.mongodb.morphia.annotations.Entity;</p>
+<p>/**</p>
+<ul>
+<li>Created by zhongyq on 17/2/4.<br>*/<br>@Data<br>@Embedded<br>public class Address {<br> private String province;<br> private String street;<br> private String name;<br>}</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">唯一的区别在于```@Entity```变为了```@Embedded</div></pre></td></tr></table></figure>
+<h3 id="Step-6-Dao"><a href="#Step-6-Dao" class="headerlink" title="Step 6: Dao"></a>Step 6: Dao</h3><h4 id="UserDao-java-增删改查"><a href="#UserDao-java-增删改查" class="headerlink" title="UserDao.java(增删改查)"></a>UserDao.java(增删改查)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> info.yqzhong.dao;</div><div class="line"></div><div class="line"><span class="keyword">import</span> info.yqzhong.entity.User;</div><div class="line"><span class="keyword">import</span> org.bson.types.ObjectId;</div><div class="line"><span class="keyword">import</span> org.mongodb.morphia.Datastore;</div><div class="line"><span class="keyword">import</span> org.mongodb.morphia.dao.BasicDAO;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by zhongyq on 17/2/4.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserDao</span> <span class="keyword">extends</span> <span class="title">BasicDAO</span>&lt;<span class="title">User</span>, <span class="title">ObjectId</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UserDao</span><span class="params">(Datastore ds)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(ds);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveUser</span><span class="params">(User user)</span> </span>&#123;</div><div class="line">    	<span class="keyword">this</span>.save(user);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUserById</span><span class="params">(String id)</span> </span>&#123;</div><div class="line">    	User user = get(<span class="keyword">new</span> ObjectId(id));</div><div class="line">    	<span class="keyword">return</span> user;</div><div class="line">    	<span class="comment">// 或者：</span></div><div class="line">    	<span class="comment">// Query&lt;User&gt; query = getDatastore().find(User).field("id").equal(new ObjectId(id));</span></div><div class="line">    	<span class="comment">// return query.get();</span></div><div class="line">    	<span class="comment">// 或者</span></div><div class="line">    	<span class="comment">// return query.asList().get(0);</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function">pubic <span class="keyword">void</span> <span class="title">updateUser</span><span class="params">(User user)</span> </span>&#123;</div><div class="line">        User u = getUserById(user.getId());</div><div class="line">        UpdateOperations&lt;User&gt; updateOperations = getDatastore().createUpdateOperations(User).set(<span class="string">"name"</span>, user.getName()).set(<span class="string">"phone"</span>, user.getPhone());</div><div class="line">        getDatastore().update(u, updateOperations);</div><div class="line">        <span class="comment">// 若要改一个列表的User的话，可以调用update(Query&lt;User&gt;， UpdateOperations&lt;User&gt;)</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteUser</span><span class="params">(User user)</span> </span>&#123;</div><div class="line">        delete(user);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="在spring-morphia-xml中配置"><a href="#在spring-morphia-xml中配置" class="headerlink" title="在spring-morphia.xml中配置"></a>在spring-morphia.xml中配置</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userDao"</span> <span class="attr">class</span>=<span class="string">"info.yqzhong.dao.UserDao"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">ref</span>=<span class="string">"datastore"</span> <span class="attr">index</span>=<span class="string">"0"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>此时若要在Service中调用只要</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Autowired</span></div><div class="line"><span class="keyword">private</span> UserDao userDao;</div></pre></td></tr></table></figure>
+<p>即可直接调用userDao。</p>
+<p>至此基本配置及用法已经基本完成。就先说到这吧！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/mongodb/" rel="tag">#mongodb</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/12/java_run_sh_cmd/" rel="next" title="Java 执行 命令行命令（sh脚本）">
+                <i class="fa fa-chevron-left"></i> Java 执行 命令行命令（sh脚本）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/05/mongodb_morphia_config/"
+           data-title="Spring & mongodb(morphia)" data-url="http://yoursite.com/2017/02/05/mongodb_morphia_config/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar/ez.jpg"
+               alt="yqzhong" />
+          <p class="site-author-name" itemprop="name">yqzhong</p>
+          <p class="site-description motion-element" itemprop="description">一个学生的逆袭道路</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-1-Maven依赖"><span class="nav-number">1.</span> <span class="nav-text">Step 1: Maven依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-3-工具类"><span class="nav-number">2.</span> <span class="nav-text">Step 3: 工具类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MongoFactoryBean-java"><span class="nav-number">2.1.</span> <span class="nav-text">MongoFactoryBean.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MorphiaFactoryBean-java"><span class="nav-number">2.2.</span> <span class="nav-text">MorphiaFactoryBean.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DatastoreFactoryBean-java"><span class="nav-number">2.3.</span> <span class="nav-text">DatastoreFactoryBean.java</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-4-使用"><span class="nav-number">3.</span> <span class="nav-text">Step 4: 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建实体类"><span class="nav-number">3.1.</span> <span class="nav-text">创建实体类:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#User-java"><span class="nav-number">3.1.1.</span> <span class="nav-text">User.java</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-6-Dao"><span class="nav-number">3.2.</span> <span class="nav-text">Step 6: Dao</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#UserDao-java-增删改查"><span class="nav-number">3.2.1.</span> <span class="nav-text">UserDao.java(增删改查)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在spring-morphia-xml中配置"><span class="nav-number">3.2.2.</span> <span class="nav-text">在spring-morphia.xml中配置</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yqzhong</span>
+  <br />
+
+  <span id="busuanzi_container_site_pv">
+   Total visited <span id="busuanzi_value_site_pv"></span> times
+  </span>
+
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yqzhong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("ulacx6EO7bIa5RBt9L9OTmCM-gzGzoHsz", "zls3E5Gs0a1oCNGyFDiT2f9l");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+  
+</body>
+</html>
