@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="server, shadowsocks," />
+  <meta name="keywords" content="java,spring,spring boot," />
 
 
 
@@ -86,16 +86,18 @@
 
 
 
-<meta name="description" content="本文讲述下在ubuntu 16.01的服务器上配置shadowsocks用于访问外网。">
+<meta name="description" content="Spring boot中解决浏览器跨域问题。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="服务器上配置shadowsocks">
-<meta property="og:url" content="http://yoursite.com/2016/05/14/server_shadowsocks/index.html">
+<meta property="og:title" content="浏览器跨域的问题， spring boot的解决方案">
+<meta property="og:url" content="http://yoursite.com/2017/03/13/spring_boot_cross_origin/index.html">
 <meta property="og:site_name" content="ZhOnG">
-<meta property="og:description" content="本文讲述下在ubuntu 16.01的服务器上配置shadowsocks用于访问外网。">
-<meta property="og:updated_time" content="2017-02-27T09:20:40.000Z">
+<meta property="og:description" content="Spring boot中解决浏览器跨域问题。">
+<meta property="og:image" content="http://yoursite.com/images/spring_boot_demo/cross_origin_error.jpg">
+<meta property="og:updated_time" content="2017-03-13T14:03:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="服务器上配置shadowsocks">
-<meta name="twitter:description" content="本文讲述下在ubuntu 16.01的服务器上配置shadowsocks用于访问外网。">
+<meta name="twitter:title" content="浏览器跨域的问题， spring boot的解决方案">
+<meta name="twitter:description" content="Spring boot中解决浏览器跨域问题。">
+<meta name="twitter:image" content="http://yoursite.com/images/spring_boot_demo/cross_origin_error.jpg">
 
 
 
@@ -116,10 +118,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/05/14/server_shadowsocks/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/13/spring_boot_cross_origin/"/>
 
 
-  <title> 服务器上配置shadowsocks | ZhOnG </title>
+  <title> 浏览器跨域的问题， spring boot的解决方案 | ZhOnG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -259,7 +261,7 @@
             
             
               
-                服务器上配置shadowsocks
+                浏览器跨域的问题， spring boot的解决方案
               
             
           </h1>
@@ -271,8 +273,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-14T00:29:20+08:00" content="2016-05-14">
-              2016-05-14
+            <time itemprop="dateCreated" datetime="2017-03-13T20:35:01+08:00" content="2017-03-13">
+              2017-03-13
             </time>
           </span>
 
@@ -285,20 +287,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/server/" itemprop="url" rel="index">
-                    <span itemprop="name">server</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/server/shadowsocks/" itemprop="url" rel="index">
-                    <span itemprop="name">shadowsocks</span>
+                  <a href="/categories/Java-Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Java Web</span>
                   </a>
                 </span>
 
@@ -313,8 +303,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/14/server_shadowsocks/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/14/server_shadowsocks/" itemprop="commentsCount"></span>
+                <a href="/2017/03/13/spring_boot_cross_origin/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/13/spring_boot_cross_origin/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -324,7 +314,7 @@
           
           
           
-              <span id="/2016/05/14/server_shadowsocks/" class="leancloud_visitors" data-flag-title="服务器上配置shadowsocks">
+              <span id="/2017/03/13/spring_boot_cross_origin/" class="leancloud_visitors" data-flag-title="浏览器跨域的问题， spring boot的解决方案">
               &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                <i class="fa fa-eye"></i>
@@ -346,20 +336,19 @@
       
 
       
-        <h2 id="Step-0-查看shadowsocks的wiki"><a href="#Step-0-查看shadowsocks的wiki" class="headerlink" title="Step 0: 查看shadowsocks的wiki"></a>Step 0: 查看shadowsocks的wiki</h2><p><a href="https://github.com/shadowsocks/shadowsocks/tree/master" target="_blank" rel="external">shadowsocks</a>，可以查看到所有的详细情况及配置情况，这里只是简单记录下自己配置的步骤。</p>
-<h2 id="Step-1-购买一个国外的服务器"><a href="#Step-1-购买一个国外的服务器" class="headerlink" title="Step 1: 购买一个国外的服务器"></a>Step 1: 购买一个国外的服务器</h2><p>首先我们需要一个服务器，这里我们使用<a href="https://www.digitalocean.com/" target="_blank" rel="external">digitalocean</a>上的服务器，我们选择Ubuntu 16.01 当然 CentOs也可以。当然也可以选择aws等其他服务器。</p>
-<h2 id="Step-2-通过ssh登录服务器"><a href="#Step-2-通过ssh登录服务器" class="headerlink" title="Step 2: 通过ssh登录服务器"></a>Step 2: 通过ssh登录服务器</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh root@your_ip</div></pre></td></tr></table></figure>
-<h2 id="Step-3-安装shadowsocks"><a href="#Step-3-安装shadowsocks" class="headerlink" title="Step 3: 安装shadowsocks"></a>Step 3: 安装shadowsocks</h2><p>ubuntu下使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">apt-get install python-pip</div><div class="line">pip install shadowsocks</div></pre></td></tr></table></figure></p>
-<p>centos下使用:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum install python-setuptools &amp;&amp; easy_install pip</div><div class="line">pip install shadowsocks</div></pre></td></tr></table></figure></p>
-<h2 id="Step-4-修改配置文件"><a href="#Step-4-修改配置文件" class="headerlink" title="Step 4: 修改配置文件"></a>Step 4: 修改配置文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /etc/shadowsocks.json</div></pre></td></tr></table></figure>
-<p>内容如下</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"server"</span>:<span class="string">"0.0.0.0"</span>,</div><div class="line">    <span class="attr">"server_port"</span>:<span class="number">3389</span>,</div><div class="line">    <span class="attr">"local_address"</span>: <span class="string">"127.0.0.1"</span>,</div><div class="line">    <span class="attr">"local_port"</span>:<span class="number">1080</span>,</div><div class="line">    <span class="attr">"password"</span>:<span class="string">"your_password"</span>,</div><div class="line">    <span class="attr">"timeout"</span>:<span class="number">300</span>,</div><div class="line">    <span class="attr">"method"</span>:<span class="string">"aes-256-cfb"</span>,</div><div class="line">    <span class="attr">"fast_open"</span>: <span class="literal">false</span>,</div><div class="line">    <span class="attr">"workers"</span>: <span class="number">1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="Step-5-启动Shadowsocks"><a href="#Step-5-启动Shadowsocks" class="headerlink" title="Step 5: 启动Shadowsocks"></a>Step 5: 启动Shadowsocks</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssserver -c /etc/shadowsocks.json <span class="_">-d</span> start</div></pre></td></tr></table></figure>
-<p>至此服务器上的shadowsocks配置完成。</p>
-<h2 id="Step-6-连接shadowsocks"><a href="#Step-6-连接shadowsocks" class="headerlink" title="Step 6: 连接shadowsocks"></a>Step 6: 连接shadowsocks</h2><p>###mac<br>可以安装<a href="https://github.com/shadowsocks/shadowsocks-iOS/releases" target="_blank" rel="external">shadowsocks</a>,直接输入ip、端口及加密和密码即可。</p>
-<h3 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h3><p>同上，安装<a href="https://github.com/shadowsocks/shadowsocks-windows/releases" target="_blank" rel="external">shadowsocks</a></p>
-<h3 id="android"><a href="#android" class="headerlink" title="android"></a>android</h3><p>参见<a href="https://github.com/shadowsocks/shadowsocks-windows/releases" target="_blank" rel="external">shadowsocks-android</a></p>
-<h3 id="IOS"><a href="#IOS" class="headerlink" title="IOS"></a>IOS</h3><p>app store搜索surge即可</p>
+        <h2 id="Step-1：理解跨域"><a href="#Step-1：理解跨域" class="headerlink" title="Step 1：理解跨域"></a>Step 1：理解跨域</h2><h3 id="同源："><a href="#同源：" class="headerlink" title="同源："></a>同源：</h3><p>就是协议相同、域名相同、端口相同的两个网页就是同源的，<strong><em>不同源的网页</em></strong>中Cookie、LocalStorage和IndexDB无法读取、DOM无法获得、Ajax请求不能发送。</p>
+<p>有所谓的跨域问题，个人理解是主要是由于浏览器自身的原因，是浏览器拒绝了用户发出的跨域请求，以此来防止信息泄漏。</p>
+<p>而服务器端一直是允许跨域的，所以服务器端真正要防止跨域请求，必然会在header或者请求的某个部分加上自身的一些标识，服务器接收到请求的第一步能够识别这个标识后才进行处理才是最保险的做法。</p>
+<h3 id="Cookie："><a href="#Cookie：" class="headerlink" title="Cookie："></a>Cookie：</h3><p>Cookie可以理解为一种缓存，同源的网页能够共享，当然，如果一级域名相同，则可以通过设置<code>document.domain</code>相同，且在服务器端设置<code>Set-Cookie: key=value; domain=.xxxx; path=/</code>，也能实现共享cookie。</p>
+<h2 id="Step-2-浏览器跨域？服务器端的配置-Spring-boot"><a href="#Step-2-浏览器跨域？服务器端的配置-Spring-boot" class="headerlink" title="Step 2: 浏览器跨域？服务器端的配置(Spring boot)"></a>Step 2: 浏览器跨域？服务器端的配置(Spring boot)</h2><p>上述其实已经说过了，当你使用高级语言（java/python/php等）发送请求的话，服务器端是可以正常访问并返回相应结果的，但当使用浏览器发送请求时，如果服务器端没有特别设置允许跨域，就会出现错误信息：</p>
+<p><img src="/images/spring_boot_demo/cross_origin_error.jpg" alt="error_message"></p>
+<p>这时候就需要在服务器端设置允许跨域了，具体如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"><span class="keyword">import</span> org.springframework.web.cors.CorsConfiguration;</div><div class="line"><span class="keyword">import</span> org.springframework.web.cors.UrlBasedCorsConfigurationSource;</div><div class="line"><span class="keyword">import</span> org.springframework.web.filter.CorsFilter;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by zhongyq on 17/3/10.</div><div class="line"> */</div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CorsConfig</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">private</span> CorsConfiguration <span class="title">buildConfig</span><span class="params">()</span> </span>&#123;</div><div class="line">        CorsConfiguration corsConfiguration = <span class="keyword">new</span> CorsConfiguration();</div><div class="line">        corsConfiguration.addAllowedOrigin(<span class="string">"*"</span>);</div><div class="line">        corsConfiguration.addAllowedHeader(<span class="string">"*"</span>);</div><div class="line">        corsConfiguration.addAllowedMethod(<span class="string">"*"</span>);</div><div class="line">        <span class="keyword">return</span> corsConfiguration;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> CorsFilter <span class="title">corsFilter</span><span class="params">()</span> </span>&#123;</div><div class="line">        UrlBasedCorsConfigurationSource source = <span class="keyword">new</span> UrlBasedCorsConfigurationSource();</div><div class="line">        source.registerCorsConfiguration(<span class="string">"/**"</span>, buildConfig());</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CorsFilter(source);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当然上述<code>addAllowedOrigin()</code>方法可以设置服务器允许的来源域名，<code>addAllowedHeader()</code>方法可以设置服务器允许的头信息，<code>addAllowedMethod()</code>方法可以设置服务器允许的请求方法(GET/POST/DELETE等)</p>
+<p><strong><em>或者在拦截器中配置</em></strong>拦截器中配置<code>response.addHeader(&quot;Access-Control-Allow-Origin&quot;, &quot;*&quot;);</code>应该也行？</p>
+<h2 id="附录：SpringMVC中的配置："><a href="#附录：SpringMVC中的配置：" class="headerlink" title="附录：SpringMVC中的配置："></a>附录：SpringMVC中的配置：</h2><p>使用注解<code>@CrossOrigin(origins = &quot;*&quot;, maxAge = 3600,methods={RequestMethod.POST})</code></p>
+<p>或者全局配置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CorsConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span></span>&#123;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> </span>&#123;</div><div class="line">    </div><div class="line">    registry.addMapping(<span class="string">"/**"</span>).allowedOrigins(<span class="string">"*"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -382,7 +371,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/server-shadowsocks/" rel="tag">#server, shadowsocks</a>
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/spring/" rel="tag">#spring</a>
+          
+            <a href="/tags/spring-boot/" rel="tag">#spring boot</a>
           
         </div>
       
@@ -391,13 +384,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/02/28/spring_boot_hibernate_config/" rel="next" title="Java Web之Spring boot & hibernate(mysql)">
+                <i class="fa fa-chevron-left"></i> Java Web之Spring boot & hibernate(mysql)
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/05/server-initialize/" rel="prev" title="Python爬虫（一）—— 配置服务器">
-                Python爬虫（一）—— 配置服务器 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -423,8 +416,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/14/server_shadowsocks/"
-           data-title="服务器上配置shadowsocks" data-url="http://yoursite.com/2016/05/14/server_shadowsocks/">
+      <div class="ds-thread" data-thread-key="2017/03/13/spring_boot_cross_origin/"
+           data-title="浏览器跨域的问题， spring boot的解决方案" data-url="http://yoursite.com/2017/03/13/spring_boot_cross_origin/">
       </div>
     
   </div>
@@ -522,7 +515,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-0-查看shadowsocks的wiki"><span class="nav-number">1.</span> <span class="nav-text">Step 0: 查看shadowsocks的wiki</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-1-购买一个国外的服务器"><span class="nav-number">2.</span> <span class="nav-text">Step 1: 购买一个国外的服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-2-通过ssh登录服务器"><span class="nav-number">3.</span> <span class="nav-text">Step 2: 通过ssh登录服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-3-安装shadowsocks"><span class="nav-number">4.</span> <span class="nav-text">Step 3: 安装shadowsocks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-4-修改配置文件"><span class="nav-number">5.</span> <span class="nav-text">Step 4: 修改配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-5-启动Shadowsocks"><span class="nav-number">6.</span> <span class="nav-text">Step 5: 启动Shadowsocks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-6-连接shadowsocks"><span class="nav-number">7.</span> <span class="nav-text">Step 6: 连接shadowsocks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#windows"><span class="nav-number">7.1.</span> <span class="nav-text">windows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#android"><span class="nav-number">7.2.</span> <span class="nav-text">android</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IOS"><span class="nav-number">7.3.</span> <span class="nav-text">IOS</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-1：理解跨域"><span class="nav-number">1.</span> <span class="nav-text">Step 1：理解跨域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#同源："><span class="nav-number">1.1.</span> <span class="nav-text">同源：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie："><span class="nav-number">1.2.</span> <span class="nav-text">Cookie：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-2-浏览器跨域？服务器端的配置-Spring-boot"><span class="nav-number">2.</span> <span class="nav-text">Step 2: 浏览器跨域？服务器端的配置(Spring boot)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录：SpringMVC中的配置："><span class="nav-number">3.</span> <span class="nav-text">附录：SpringMVC中的配置：</span></a></li></ol></div>
             
           </div>
         </section>
