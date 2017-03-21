@@ -1,0 +1,806 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,architecture," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ZhOnG" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="本文主要介绍使用web架构设计的一些想法，主要谈谈最近用的比较多的几种web框架：MVC与微服务框架，并谈谈微服务与SOA的情况。前后端分离还是后端控制整个跳转逻辑哪种更靠谱?">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web应用架构的思考，前后端分离思想的探索">
+<meta property="og:url" content="http://yoursite.com/2017/03/20/web_architecture_thought/index.html">
+<meta property="og:site_name" content="ZhOnG">
+<meta property="og:description" content="本文主要介绍使用web架构设计的一些想法，主要谈谈最近用的比较多的几种web框架：MVC与微服务框架，并谈谈微服务与SOA的情况。前后端分离还是后端控制整个跳转逻辑哪种更靠谱?">
+<meta property="og:updated_time" content="2017-03-21T16:59:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="web应用架构的思考，前后端分离思想的探索">
+<meta name="twitter:description" content="本文主要介绍使用web架构设计的一些想法，主要谈谈最近用的比较多的几种web框架：MVC与微服务框架，并谈谈微服务与SOA的情况。前后端分离还是后端控制整个跳转逻辑哪种更靠谱?">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/20/web_architecture_thought/"/>
+
+
+  <title> web应用架构的思考，前后端分离思想的探索 | ZhOnG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">ZhOnG</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">随缘笔记</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                web应用架构的思考，前后端分离思想的探索
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-03-20T16:04:00+08:00" content="2017-03-20">
+              2017-03-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java-Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Java Web</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/20/web_architecture_thought/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/20/web_architecture_thought/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+          
+          
+              <span id="/2017/03/20/web_architecture_thought/" class="leancloud_visitors" data-flag-title="web应用架构的思考，前后端分离思想的探索">
+              &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+               <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="对架构的感想"><a href="#对架构的感想" class="headerlink" title="对架构的感想"></a>对架构的感想</h2><h3 id="Model-View-Controller"><a href="#Model-View-Controller" class="headerlink" title="Model-View-Controller"></a>Model-View-Controller</h3><p>Model-View-Controller(MVC)架构应该是Web应用中最常用的架构了，整体的架构在此也不做多介绍，网上介绍很多，在这里我只想关注一点就是MVC中controller的作用，除了接收请求，还有一个功能就是视图的选择，View与Controller之间存在过于紧密的联系，与模型层交互的效率也较低，加大了前后端的关联，使得前后端无法完全脱离，独立开发。但是其低耦合、高重用性和高可维护性依旧在Web应用中有着重要的地位。</p>
+<h3 id="前端框架的逐渐成熟"><a href="#前端框架的逐渐成熟" class="headerlink" title="前端框架的逐渐成熟"></a>前端框架的逐渐成熟</h3><p>如今的前端框架逐渐成熟，angular、react、backbone等框架已经逐步运用在多个企业中成为主流，对于前后端分离来说，这些框架中最重要的肯定还是提供了<strong><em>前端路由</em></strong>这个功能，通过这个功能，可以通过<strong><em>hash</em></strong>值来根据url跳转到对应的html，换句话来说，就是前端已经能实现跳转逻辑，并且很好的封装进了框架之中，因此，<strong><em>控制逻辑可以不再掌控在后端</em></strong>，也因此实现了前后端的分离。</p>
+<p>当然纯原生的js通过ajax获取到相应结果后强制跳转url也可以实现这种前端控制逻辑的情况，但是这种实现可能会导致大量html的存在，而不是像使用<strong><em>前端路由</em></strong>的通过前端模块化实现，总之使用框架的确能方便很多。</p>
+<h3 id="微服务架构"><a href="#微服务架构" class="headerlink" title="微服务架构"></a>微服务架构</h3><p>微服务架构是近来兴起的一种架构，最近项目就用了一个类似的架构，在我的认知中，主要思路是将一个庞大的单体应用通过分解为各个简单的服务，只是单纯的为前端提供各个<strong><em>api</em></strong>，通过http restful定义的接口提供他人服务。这样的好处就是各种终端都可以调用，没有语言、平台的限制，只要定义好数据结构，均能访问。这样能更好的便于分布式的部署使用，也因此逐步成为了一种主流发展趋势，结合上述前端框架可以很容易呈现前后端分离的可行性。</p>
+<h2 id="微服务架构＋前端框架实现前后端分离"><a href="#微服务架构＋前端框架实现前后端分离" class="headerlink" title="微服务架构＋前端框架实现前后端分离"></a>微服务架构＋前端框架实现前后端分离</h2><p>最近的项目服务器端使用了微服务架构，技术使用的是<strong><em>Springboot + redis + mybatis</em></strong>，前端使用的<strong><em>Angular</em></strong>框架，通过前端路由实现逻辑控制跳转。</p>
+<p>后端服务器端的一个demo请参见<a href="http://yqzhong.info/2017/02/28/spring_boot_hibernate_config/" target="_blank" rel="external">此处</a></p>
+<p>其中<code>UserController</code>类就是一个服务，没有视图控制的跳转，前端通过ajax调用，获取相应数据后，跳转到相应界面，前端的部分写法在后续的文章中会提到。</p>
+<h2 id="个人理解的微服务与mvc的区别与优缺点"><a href="#个人理解的微服务与mvc的区别与优缺点" class="headerlink" title="个人理解的微服务与mvc的区别与优缺点"></a>个人理解的微服务与mvc的区别与优缺点</h2><h3 id="对外接口的区别"><a href="#对外接口的区别" class="headerlink" title="对外接口的区别"></a>对外接口的区别</h3><p>很显然，大部分微服务，大部分是通过ajax调用，就是一种<strong><em>异步调用</em></strong>，返回的是一个<strong><em>请求的结果</em></strong>，而不一定是页面（当然也可以是页面），当然也可以使用类同步化的方法调用，但是显然，由于没有视图选择的限制，跳转的情况都由前端解决。也就是说，这些服务的调用，在服务器端是没有<strong><em>完整的业务跳转逻辑</em></strong>的，仅仅是一个个方法（服务）组成的一系列api，因此十分方便分布式的部署使用，而对于每个API接口，都尽量最好要有<strong><em>权限的控制</em></strong>，这里我推荐一种实现方式：通过注解实现权限控制，详见<a href="http://yqzhong.info/2017/03/15/spring_annotation_auth/" target="_blank" rel="external">此处</a>。</p>
+<p>MVC中的Controller很明显是一个<strong><em>同步化</em></strong>方法，必须等待Controller中的逻辑处理完毕后，等待服务器传回的视图渲染。因此，服务器能够大致掌控<strong><em>用户操作的逻辑</em></strong>，更容易发现业务逻辑上的缺陷，也相应的更安全，有着一个统一的逻辑线，因此难以放在不同的服务器中。</p>
+<hr>
+<h3 id="session和cookie的问题"><a href="#session和cookie的问题" class="headerlink" title="session和cookie的问题"></a>session和cookie的问题</h3><h5 id="微服务："><a href="#微服务：" class="headerlink" title="微服务："></a>微服务：</h5><p>很显然，微服务为了提供给多平台，十分容易造成<strong><em>每次请求对于服务器端都会生成一个新的session</em></strong>的问题，而不是最初的具有权限的session，这也是由于服务器端没有一个完整的逻辑线的问题，因此，如果要使用<strong><em>session</em></strong>中的信息，一种解决方案是在服务器存用一个表用于存储权限信息，每次登录或获取权限后服务器生成一个独一无二的token，每次用户请求的时候，在请求中回传给服务器这个token（可以在请求的header里)，从而识别出用户是否具有使用该服务的权限。</p>
+<p>比较基础的是使用一个全局的<code>Map&lt;String, HttpSession&gt;</code>，key为第一次请求登录或获取权限后的<code>session</code>的id，后面存取的是<code>HttpSession</code>，包括了那次会话的信息，这样做的好处是可以通过一个接口实现<code>HttpSessionListener</code>，每当一个存在Map中的<code>HttpSession</code>被人工销毁或者过期销毁的时候，可以重写session销毁代码删除map中的内容，如以下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SessionListener</span> <span class="keyword">implements</span> <span class="title">HttpSessionListener</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sessionCreated</span><span class="params">(HttpSessionEvent httpSessionEvent)</span> </span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sessionDestroyed</span><span class="params">(HttpSessionEvent httpSessionEvent)</span> </span>&#123;</div><div class="line">        HttpSession session = httpSessionEvent.getSession();</div><div class="line">        SessionMap.remove(session);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当然方法还有许多种，这里其实更加推荐使用<strong><em>redis</em></strong>存取信息，同样原理也是通过在请求头中带有身份验证的token(session)，在redis中存入用户信息，节省空间和提高效率。只要实现以下两个方法即可:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserSessionStorage</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 从缓存中取出user</div><div class="line">     * <span class="doctag">@param</span> session</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function">UserInfo <span class="title">getUser</span><span class="params">(String session)</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 向缓存中放user</div><div class="line">     * <span class="doctag">@param</span> session</div><div class="line">     * <span class="doctag">@param</span> id</div><div class="line">     * <span class="doctag">@param</span> identity</div><div class="line">     * <span class="doctag">@throws</span> Exception</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">putUser</span><span class="params">(String session, <span class="keyword">long</span> id, String identity)</span> <span class="keyword">throws</span> Exception</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>redis</code>的方法配置网上也讲的很多，比较简单，这里我们不再赘述，在之后的项目中，可以直接展示给大家。</p>
+<h5 id="MVC："><a href="#MVC：" class="headerlink" title="MVC："></a>MVC：</h5><p>很显然，mvc由于整个逻辑线都在服务器端，因此可以与用户端实现一种长链接，这也意味着整个用户的<code>session</code>只有一个，也就是说，可以将很多信息直接存在session中，服务器能正确识别session和其中的权限内容。</p>
+<hr>
+<h3 id="开发场景"><a href="#开发场景" class="headerlink" title="开发场景"></a>开发场景</h3><p>根据以上，我们可以发现MVC开发必须紧密联系前后端开发人员，而微服务则只需要开发人员定义好接口，则可以并行开发，这里无疑将职责分离的很清晰，几乎没有耦合。</p>
+<p>个人认为MVC更加适合与那些每个用户角色都有着完整逻辑路线的，有着整个请求先后顺序的工程项目，即那些管理信息系统，十分的合适。</p>
+<p>微服务则可以提供那些零散的少数逻辑的项目，能够和分布式紧密联系的项目，例如爬虫、分布式数据库请求等，或者那些公开的接口，就是所有人都能访问的那些接口项目，都可以使用微服务，这里感觉微服务和SOA其实很像很像。</p>
+<p>但是不得不说当微服务很多的时候，这时候是很难维护的。但接口的大众化是一种趋势，要想提供更好的服务无疑微服务是一种很适合的架构，而对于内部系统，则mvc更加合适。</p>
+<p>以上是对经典的mvc架构和现在逐渐流行的微服务架构的一些感悟和思考。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/architecture/" rel="tag">#architecture</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/15/spring_annotation_auth/" rel="next" title="java 注解，在web项目中使用注解实现权限控制">
+                <i class="fa fa-chevron-left"></i> java 注解，在web项目中使用注解实现权限控制
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/20/web_architecture_thought/"
+           data-title="web应用架构的思考，前后端分离思想的探索" data-url="http://yoursite.com/2017/03/20/web_architecture_thought/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar/ez.jpg"
+               alt="yqzhong" />
+          <p class="site-author-name" itemprop="name">yqzhong</p>
+          <p class="site-description motion-element" itemprop="description">一个学生的逆袭道路</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://zhoujianshi.github.io/" title="Zhou Jianshi's blog" target="_blank">Zhou Jianshi's blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://huilan.me/" title="fuxiaode's blog" target="_blank">fuxiaode's blog</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#对架构的感想"><span class="nav-number">1.</span> <span class="nav-text">对架构的感想</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-View-Controller"><span class="nav-number">1.1.</span> <span class="nav-text">Model-View-Controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端框架的逐渐成熟"><span class="nav-number">1.2.</span> <span class="nav-text">前端框架的逐渐成熟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#微服务架构"><span class="nav-number">1.3.</span> <span class="nav-text">微服务架构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#微服务架构＋前端框架实现前后端分离"><span class="nav-number">2.</span> <span class="nav-text">微服务架构＋前端框架实现前后端分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人理解的微服务与mvc的区别与优缺点"><span class="nav-number">3.</span> <span class="nav-text">个人理解的微服务与mvc的区别与优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对外接口的区别"><span class="nav-number">3.1.</span> <span class="nav-text">对外接口的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session和cookie的问题"><span class="nav-number">3.2.</span> <span class="nav-text">session和cookie的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#微服务："><span class="nav-number">3.2.0.1.</span> <span class="nav-text">微服务：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MVC："><span class="nav-number">3.2.0.2.</span> <span class="nav-text">MVC：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发场景"><span class="nav-number">3.3.</span> <span class="nav-text">开发场景</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yqzhong</span>
+  <br />
+
+  <span id="busuanzi_container_site_pv">
+   Total visited <span id="busuanzi_value_site_pv"></span> times
+  </span>
+
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yqzhong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("ulacx6EO7bIa5RBt9L9OTmCM-gzGzoHsz", "zls3E5Gs0a1oCNGyFDiT2f9l");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+  
+</body>
+</html>
