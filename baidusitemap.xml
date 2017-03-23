@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/03/20/web_architecture_thought/</loc>
+    <lastmod>2017-03-21T16:59:32.000Z</lastmod>
+    <data>
+        <display>
+        <title>web应用架构的思考，前后端分离思想的探索</title>
+        <pubTime>2017-03-20T08:04:00.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>architecture</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java Web" url="http://yoursite.com/categories/Java-Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/03/15/spring_annotation_auth/</loc>
+    <lastmod>2017-03-16T01:59:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>java 注解，在web项目中使用注解实现权限控制</title>
+        <pubTime>2017-03-15T11:24:00.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>spring</tag>
+         
+        <tag>annotation</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java Web" url="http://yoursite.com/categories/Java-Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/03/13/spring_boot_cross_origin/</loc>
+    <lastmod>2017-03-13T14:03:16.000Z</lastmod>
+    <data>
+        <display>
+        <title>浏览器跨域的问题， spring boot的解决方案</title>
+        <pubTime>2017-03-13T12:35:01.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>spring</tag>
+         
+        <tag>spring boot</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java Web" url="http://yoursite.com/categories/Java-Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/09/05/server-initialize/</loc>
+    <lastmod>2017-03-08T05:48:25.000Z</lastmod>
+    <data>
+        <display>
+        <title>Python爬虫（一）—— 配置服务器</title>
+        <pubTime>2016-09-05T10:10:10.000Z</pubTime>
+        
+        <tag>python2.7</tag>
+         
+        <tag>CentOS</tag>
+         
+        <tag>MacOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="Python爬虫" url="http://yoursite.com/categories/Python%E7%88%AC%E8%99%AB/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/02/28/spring_boot_mybatis/</loc>
+    <lastmod>2017-03-03T07:59:14.000Z</lastmod>
+    <data>
+        <display>
+        <title>mybatis(ibatis) 对于Springboot的集成</title>
+        <pubTime>2017-02-28T08:04:00.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>spring</tag>
+         
+        <tag>spring boot</tag>
+         
+        <tag>mybatis</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java Web" url="http://yoursite.com/categories/Java-Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/02/28/spring_boot_hibernate_config/</loc>
+    <lastmod>2017-02-28T13:51:55.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java Web之Spring boot & hibernate(mysql)</title>
+        <pubTime>2017-02-28T08:04:00.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>spring</tag>
+         
+        <tag>hibernate</tag>
+         
+        <tag>spring boot</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java Web" url="http://yoursite.com/categories/Java-Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://yoursite.com/2016/05/14/server_shadowsocks/</loc>
+    <lastmod>2017-02-27T09:20:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>服务器上配置shadowsocks</title>
+        <pubTime>2016-05-13T16:29:20.000Z</pubTime>
+        
+        <tag>server, shadowsocks</tag>
+         
+         
+           
+             
+              <breadCrumb title="server" url="http://yoursite.com/categories/server/"/>
+          
+             
+              <breadCrumb title="shadowsocks" url="http://yoursite.com/categories/server/shadowsocks/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/25/%E3%80%8AReflections%20on%20Mangagement%EF%BC%9AHow%20to%E3%80%8B_reading_notes/</loc>
+    <lastmod>2017-02-25T05:36:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>《软件管理沉思录》读书笔记</title>
+        <pubTime>2016-10-25T09:16:10.000Z</pubTime>
+        
+        <tag>读书笔记</tag>
+         
+         
+           
+             
+              <breadCrumb title="books" url="http://yoursite.com/categories/books/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/09/17/%E3%80%8AThe%20Mythical%20Man-Month%E3%80%8B_reading_notes/</loc>
+    <lastmod>2017-02-25T05:33:17.000Z</lastmod>
+    <data>
+        <display>
+        <title>《人月神话》读书笔记</title>
+        <pubTime>2016-09-17T06:12:10.000Z</pubTime>
+        
+        <tag>读书笔记</tag>
+         
+         
+           
+             
+              <breadCrumb title="books" url="http://yoursite.com/categories/books/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/10/03/%E3%80%8APeopleware-%20Productive%20Projects%20and%20Teams%E3%80%8B_reading_notes/</loc>
+    <lastmod>2017-02-25T05:30:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>《人件》读书笔记</title>
+        <pubTime>2016-10-03T14:16:10.000Z</pubTime>
+        
+        <tag>读书笔记</tag>
+         
+         
+           
+             
+              <breadCrumb title="books" url="http://yoursite.com/categories/books/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/11/06/%E3%80%8AHackers%20&%20Painters%20Big%20Ideas%20from%20the%20Computer%20Age%E3%80%8B_reading_notes/</loc>
+    <lastmod>2017-02-25T05:26:02.000Z</lastmod>
+    <data>
+        <display>
+        <title>《黑客与画家》读书笔记</title>
+        <pubTime>2016-11-06T10:56:10.000Z</pubTime>
+        
+        <tag>读书笔记</tag>
+         
+         
+           
+             
+              <breadCrumb title="books" url="http://yoursite.com/categories/books/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/02/05/mongodb_morphia_config/</loc>
+    <lastmod>2017-02-25T05:17:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>Spring & mongodb(morphia)</title>
+        <pubTime>2017-02-05T02:11:01.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>mongodb</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java mongodb" url="http://yoursite.com/categories/Java-mongodb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/12/12/java_run_sh_cmd/</loc>
+    <lastmod>2017-02-25T05:15:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java 执行 命令行命令（sh脚本）</title>
+        <pubTime>2016-12-12T13:33:03.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java" url="http://yoursite.com/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/12/10/web_testing_platform_1/</loc>
+    <lastmod>2017-02-25T05:00:51.000Z</lastmod>
+    <data>
+        <display>
+        <title>JavaEE 在线答题平台的课程设计思考</title>
+        <pubTime>2016-12-10T14:31:29.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>spring</tag>
+         
+        <tag>hibernate</tag>
+         
+        <tag>web testing</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java Web" url="http://yoursite.com/categories/Java-Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/09/12/hibernate_basedao/</loc>
+    <lastmod>2016-09-12T13:09:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java Web之Spring+Hibernate的DAO层通用类</title>
+        <pubTime>2016-09-12T12:30:27.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>spring</tag>
+         
+        <tag>hibernate</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java Web" url="http://yoursite.com/categories/Java-Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/09/11/java_spring_hibernate/</loc>
+    <lastmod>2016-09-12T12:37:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java Web之配置Spring + Hibernate</title>
+        <pubTime>2016-09-11T11:09:09.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>spring</tag>
+         
+        <tag>hibernate</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java Web" url="http://yoursite.com/categories/Java-Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/09/08/data_mining_introduction/</loc>
+    <lastmod>2016-09-08T08:12:51.000Z</lastmod>
+    <data>
+        <display>
+        <title>数据挖掘简介</title>
+        <pubTime>2016-09-08T06:17:44.000Z</pubTime>
+        
+        <tag>Data Mining</tag>
+         
+        <tag>数据挖掘</tag>
+         
+         
+           
+             
+              <breadCrumb title="Data Mining" url="http://yoursite.com/categories/Data-Mining/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/09/07/requests/</loc>
+    <lastmod>2016-09-07T14:16:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>Python爬虫（二）—— 使用requests类库进行简单的爬取网页</title>
+        <pubTime>2016-09-07T11:14:37.000Z</pubTime>
+        
+        <tag>python2.7</tag>
+         
+        <tag>CentOS</tag>
+         
+        <tag>python requests</tag>
+         
+         
+           
+             
+              <breadCrumb title="Python爬虫" url="http://yoursite.com/categories/Python%E7%88%AC%E8%99%AB/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+</urlset>
