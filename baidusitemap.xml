@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://yoursite.com/2017/03/21/angular_learning_step_one/</loc>
+    <lastmod>2017-03-28T08:39:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>Angular前端框架学习笔记（一）</title>
+        <pubTime>2017-03-21T08:39:00.000Z</pubTime>
+        
+        <tag>web</tag>
+         
+        <tag>angular</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web前端" url="http://yoursite.com/categories/Web%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2017/03/20/web_architecture_thought/</loc>
     <lastmod>2017-03-21T16:59:32.000Z</lastmod>
     <data>
