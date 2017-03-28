@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://yoursite.com/2017/02/21/java_web_design_pattern_thought/</loc>
+    <lastmod>2017-03-28T12:05:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java Web中对于设计模式和使用场景的思考</title>
+        <pubTime>2017-02-21T08:04:00.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>design pattern</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java Web" url="http://yoursite.com/categories/Java-Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2017/03/21/angular_learning_step_one/</loc>
     <lastmod>2017-03-28T08:39:30.000Z</lastmod>
     <data>
