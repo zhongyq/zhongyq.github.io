@@ -3,6 +3,32 @@
 
 
     
+  <url>
+    <loc>http://yoursite.com/2017/04/12/spring_redis/</loc>
+    <lastmod>2017-04-13T16:39:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>Redis在Java web中的应用</title>
+        <pubTime>2017-04-12T08:04:00.000Z</pubTime>
+        
+        <tag>spring</tag>
+         
+        <tag>java web</tag>
+         
+        <tag>redis</tag>
+         
+        <tag>springboot</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java Web" url="http://yoursite.com/categories/Java-Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>http://yoursite.com/2017/02/21/java_web_design_pattern_thought/</loc>
